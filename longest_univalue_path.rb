@@ -105,10 +105,11 @@ class Tree
       rc = check_univalues(node.right, rc)
     end
 
-    if [lc, rc, counter].compact.max.nil?
+    compacted = [lc, rc, counter].compact.max
+    if compacted.nil?
       return 0
     else
-      return [lc, rc, counter].compact.max 
+      return compacted
     end
   end
 end
