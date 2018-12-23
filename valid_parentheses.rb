@@ -5,10 +5,12 @@ def is_valid(s)
   s.each_char do |c|
     if ['(','{','['].include?(c)
       q << c
-    elsif [')','}',']'].include?(c) && closing_bracket(c) == q.last
-      q.pop 
+    elsif [')','}',']'].include?(c)
+      closing_bracket(c) == q.last ? q.pop : q << c
     end
   end
+  
+  q.empty?
 end
 
 def closing_bracket(c)
