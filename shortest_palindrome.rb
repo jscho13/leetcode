@@ -21,3 +21,4 @@ def shortest_palindrome(s)
         end
   ans
 end
+
