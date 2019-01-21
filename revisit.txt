@@ -2,3 +2,4 @@ k-empty-slots
 longest-univalue-path
 shortest-palindrome
 first-unique-character-in-a-string #solved but very slow
+merge-k-sorted-lists #solve this manually without sort
