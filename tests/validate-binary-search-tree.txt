@@ -1,0 +1,3 @@
+[2,1,3] #true
+[5,1,7,null,null,4,8] #false
+[5,1,7,null,null,4,8] #false
