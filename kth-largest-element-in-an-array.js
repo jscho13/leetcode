@@ -15,7 +15,7 @@ function findKthLargest(nums, k) {
 }
 
 function mergeSort(arry) {
-  if (arry.length == 1) return arry;
+  if (arry.length == 1 || arry.length ==0) return arry;
   var mid = Math.floor(arry.length/2);
   var left = arry.slice(0, mid);
   var right = arry.slice(mid, arry.length)
@@ -34,3 +34,4 @@ function merge(left, right) {
   if (right.length > 0) merged = merged.concat(right);
   return merged;
 }
+
