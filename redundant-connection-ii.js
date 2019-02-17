@@ -3,24 +3,67 @@
  * @return {number[]}
  */
 
-// O(n) time-complexity. O(1) time-complexity
-var findRedundantDirectedConnection = function(edges) {
-  var adj_list = {};
-  var last_edge_added = [];
+var Node = function(value) {
+  this.val = value;
+  this.children = [];
+  this.visited = false;
+  this.parents = [];
+  this.callParent = null;
+}
 
-  // loop and create adjancency list as object
+var findRedundantDirectedConnection = function(edges) {
+  // construct a node list
+  var nodeList = [];
   for(var i=0; i<edges.length; i++) {
-    var parent_n = edges[i][0]
-    var child_n = edges[i][1]
-    // check if key exists. if it doesn't make it. if it does add it
-    if (child_n in adj_list) {
-      adj_list[child_n].push(parent_n);
-      last_edge_added = edges[i]; 
+    var parentVal = edges[i][0];
+    var childVal = edges[i][1];
+
+    if (nodeList[parentVal] && nodeList[childVal]) {
+      // add the node to children if it isn't there
+      nodeList[parentVal].children.push(childVal);
+      nodeList[childVal].parents.push(parentVal);
     } else {
-      adj_list[child_n] = [parent_n];
+      // make the nodes if they don't exist
+      var parentNode = nodeList[parentVal] || new Node(parentVal);
+      parentNode.children.push(childVal);
+      nodeList[parentVal] = parentNode;
+
+      var childNode = nodeList[childVal] || new Node(childVal);
+      childNode.parents.push(parentVal);
+      nodeList[childVal] = childNode;
+    }
+  }
+  // bfs recursion
+  var ans = [];
+  var q = [nodeList[1]];
+  
+  while (q.length > 0) {
+    var node = q.shift();
+    var children = node.children;
+    var parents = node.parents;
+
+    if (node.visited === true) {
+      for(var p=0; p<parents.length; p++) {
+        var parentIdx = parents[p];
+        if (nodeList[parentIdx].visited) ans.push([parentIdx, node.val]);
+      }
+    } else {
+      node.visited = true;
+      nodeList[node.val] = node;
+      for(var i=0; i<children.length; i++) {
+        var childIdx = children[i];
+        q.push(nodeList[childIdx]);
+      }
     }
   }
 
-  // return the last one added
-  return last_edge_added;
+  // find the latest one in the ans that matches edges
+  while (edges.length > 0) {
+    var edge = edges.pop();
+    for (var a=0; a<ans.length; a++){
+      if (JSON.stringify(ans[a]) == JSON.stringify(edge)) return edge;
+    }
+  }
+
+  return [];
 };
