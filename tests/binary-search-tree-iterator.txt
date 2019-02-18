@@ -1,2 +1,8 @@
 ["BSTIterator","next","next","hasNext","next","hasNext","next","hasNext","next","hasNext"]
 [[[7,3,15,null,null,9,20]],[null],[null],[null],[null],[null],[null],[null],[null],[null]]
+["BSTIterator","hasNext"]
+[[[]],[null]]
+["BSTIterator","hasNext","next","hasNext"]
+[[[1]],[null],[null],[null]]
+["BSTIterator","hasNext","next","hasNext","next","hasNext"]
+[[[1,null,2]],[null],[null],[null],[null],[null]]

@@ -8,8 +8,37 @@
 /**
  * @param {TreeNode} root
  */
-var BSTIterator = function(root) {
-    
+function BSTIterator(root) {
+  this.root = root;
+  this.valList = [];
+  this.currentIdx = -1;
+
+  // DFS recursion
+  this.createValList = function(node) {
+    if (node.left && node.right) {
+      this.createValList(node.left);
+      this.valList.push(node.val);
+      this.createValList(node.right);
+    } else if (node.left) {
+      this.createValList(node.left);
+      this.valList.push(node.val);
+    } else if (node.right) {
+      this.valList.push(node.val);
+      this.createValList(node.right);
+    } else {
+      this.valList.push(node.val);
+    }
+  }
+
+  if (root !== null) this.createValList(root);
+
+  this.currVal = function() {
+    return this.valList[this.currentIdx];
+  }
+
+  this.nextVal = function() {
+    return this.valList[this.currentIdx+1];
+  }
 };
 
 /**
@@ -17,7 +46,8 @@ var BSTIterator = function(root) {
  * @return {number}
  */
 BSTIterator.prototype.next = function() {
-    
+  this.currentIdx = this.currentIdx+1;
+  return this.currVal();
 };
 
 /**
@@ -25,10 +55,10 @@ BSTIterator.prototype.next = function() {
  * @return {boolean}
  */
 BSTIterator.prototype.hasNext = function() {
-    
+  return (this.nextVal() !== undefined);
 };
 
-/** 
+/**
  * Your BSTIterator object will be instantiated and called as such:
  * var obj = Object.create(BSTIterator).createNew(root)
  * var param_1 = obj.next()
