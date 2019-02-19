@@ -5,7 +5,7 @@
 var validUtf8 = function(data) {
   if (data.length === 0) return true;
 
-  // convert to boolean
+  // Convert data to boolean values
   var byteList = [];
   for(var i=0; i<data.length; i++) {
     var decVal = data[i];
@@ -18,13 +18,14 @@ var validUtf8 = function(data) {
     while (binaryVal.length < 8) {
       binaryVal.push(0);
     }
+    // Anything more then 8-bits is invalid
     if (binaryVal.length > 8) return false;
     byteList.push(binaryVal.slice(0,8).reverse());
   }
 
   while (byteList.length > 0) {
-    // figure out the byte by looking at the first n bits
-    // 010, 110, 1110, 11110 -> 1, 2, 3, 4
+    // Figure out the byte by looking at the first n bits
+    // 010, 110, 1110, 11110 -> 1, 2, 3, 4 bytes
     var byte1 = byteList.shift();
     var [bitPointer, numBytes] = [0,0]
     while (byte1[bitPointer]===1) {
@@ -37,16 +38,17 @@ var validUtf8 = function(data) {
     if (bit1===0 && bit2===1) numBytes=1;
     if (numBytes > 4) return false;
 
+    // Validate next n-1 bytes start w/10
     processedList = validateBytes(numBytes, byteList);
     if (processedList === false) return false;
     byteList = processedList;
   }
 
+  // Valid if it makes it till end
   return true;
 };
 
 function validateBytes(numBytes, byteList) {
-  // need exactly n-1 bytes starting w/10's after first byte
   var bytesCounted = 0;
   while(bytesCounted < numBytes-1) {
     if (byteList.length === 0) return false;
