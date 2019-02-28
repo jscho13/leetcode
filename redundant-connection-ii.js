@@ -6,9 +6,8 @@
 var Node = function(value) {
   this.val = value;
   this.children = [];
-  this.visited = false;
   this.parents = [];
-  this.callParent = null;
+  this.visited = false;
 }
 
 var findRedundantDirectedConnection = function(edges) {
@@ -33,37 +32,53 @@ var findRedundantDirectedConnection = function(edges) {
       nodeList[childVal] = childNode;
     }
   }
-  // bfs recursion
-  var ans = [];
-  var q = [nodeList[1]];
-  
-  while (q.length > 0) {
-    var node = q.shift();
-    var children = node.children;
-    var parents = node.parents;
 
-    if (node.visited === true) {
-      for(var p=0; p<parents.length; p++) {
-        var parentIdx = parents[p];
-        if (nodeList[parentIdx].visited) ans.push([parentIdx, node.val]);
+  // use dfs recursion can have two results
+  // 1. it's okay
+  // 2. it's circular
+  // start with the first thing we find that has no parent
+  var start=1;
+  for (var i=1; i<nodeList.length; i++) {
+    if (nodeList[i].parents.length === 0) {
+      start = i
+      break;
+    }
+  }
+  var ans = findCircular(nodeList, null, start);
+
+  // There's a third case that's not circular, but a node might have multiple parents
+  if (ans.length === 0) {
+    for (var i=1; i<nodeList.length; i++) {
+      var parents = nodeList[i].parents;
+      if (parents.length > 1) {
+        for (var p=0; p<parents.length; p++) {
+          ans.push([parents[p], i]);
+        }
       }
-    } else {
-      node.visited = true;
-      nodeList[node.val] = node;
-      for(var i=0; i<children.length; i++) {
-        var childIdx = children[i];
-        q.push(nodeList[childIdx]);
+    }
+
+    // find the latest edge that matches ans
+    while (edges.length > 0) {
+      var edge = edges.pop();
+      for (var a=0; a<ans.length; a++) {
+        if (JSON.stringify(ans[a]) == JSON.stringify(edge)) return edge;
       }
     }
   }
-
-  // find the latest one in the ans that matches edges
-  while (edges.length > 0) {
-    var edge = edges.pop();
-    for (var a=0; a<ans.length; a++){
-      if (JSON.stringify(ans[a]) == JSON.stringify(edge)) return edge;
-    }
-  }
-
-  return [];
+  return ans;
 };
+
+var findCircular = function(nodeList, pn, n) {
+  var circular;
+  if (nodeList[n].visited === true) {
+    return [pn, n];
+  } else {
+    nodeList[n].visited = true;
+    var children = nodeList[n].children;
+    for (var c=0; c<children.length; c++) {
+      circular = findCircular(nodeList, n, children[c]);
+      if (circular) return circular;
+    }
+  }
+  return [];
+}
