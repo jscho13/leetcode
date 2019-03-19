@@ -15,3 +15,6 @@ validate-binary-search-tree
 
 # try and do it with DLL
 lru-cache
+
+# try without sorting
+merge-intervals
