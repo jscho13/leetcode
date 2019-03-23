@@ -1,4 +1,6 @@
+# revisited. good job.
 k-empty-slots
+
 longest-univalue-path
 
 # how are you supposed to get the key idea here?
@@ -18,3 +20,9 @@ lru-cache
 
 # try without sorting
 merge-intervals
+
+# try iterative version
+binary-tree-inorder-traversal
+
+# can you solve this in one line?
+maximum-depth-of-binary-tree
