@@ -1,6 +1,7 @@
 # revisited. good job.
 k-empty-slots
 
+# do this in javascript
 longest-univalue-path
 
 # how are you supposed to get the key idea here?
@@ -26,3 +27,9 @@ binary-tree-inorder-traversal
 
 # can you solve this in one line?
 maximum-depth-of-binary-tree
+
+# do this faster
+find-k-pairs-with-smallest-sums
+
+# aim for 50%
+minimum-window-substring
