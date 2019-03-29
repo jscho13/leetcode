@@ -1,20 +1,54 @@
-/**
- * @param {number[]} nums
- * @return {number}
- */
 var arrayPairSum = function(nums) {
-    
+  // obvious intution is to sort them, and then group in pairs of 2, then sum the min of all of them
+  // when grouping in pairs of 2 try using 2 pointers instead of just keeping a counter
+  nums = nums.sort(function(a,b) { return a-b; });
+  var j;
+  var pairs = [];
+
+  for (var i=0; i<nums.length; i++) {
+    if (i%2 == 1) {
+      j=i-1;
+      pairs.push([nums[j], nums[i]]);
+    }
+  }
+  
+  pairs = pairs.map(function(a) { return Math.min(a[0], a[1]); } );
+  return pairs.reduce(function(a, b) { return a+b; }, 0);
 };
 
-console.log(arrayPairSum([1,4,3,2]));
+// Not an obvious intution.
+// The inner loop w/curAmount takes advantage of:
+// an even count will cancel (2,2), (2,2)
+// an odd count will get the min of two values (2,2), (2,3)
 
-// Given an array of 2n integers, your task is to group these integers into n pairs of integer, say (a1, b1), (a2, b2), ..., (an, bn) which makes sum of min(ai, bi) for all i from 1 to n as large as possible.
-// 
-// Example 1:
-// Input: [1,4,3,2]
-// 
-// Output: 4
-// Explanation: n is 2, and the maximum sum of pairs is 4 = min(1, 2) + min(3, 4).
-// Note:
-// n is a positive integer, which is in the range of [1, 10000].
-// All the integers in the array will be in the range of [-10000, 10000].
+// The toggling evenOdd basically negates every other value
+// It's a bitwise operation for added speed T_T
+
+// var arrayPairSum = function(nums) {
+//   let hash = [];
+//   for(let i=0; i<20001;++i){
+//     hash[i]=0;
+//   }
+//   let sum = 0;
+//   let min= Number.MAX_VALUE;
+//   let max= Number.MIN_VALUE;
+//   for(let i=0; i<nums.length;++i){
+//     let cur=nums[i]+10000;
+//     ++hash[cur];
+//     min=Math.min(min,cur);
+//     max=Math.max(max,cur);
+//   }
+//   let evenOdd=0;
+//   for(let i=min; i<=max;++i){
+//     let curAmount=hash[i];
+//      for(let j=0; j<curAmount;++j){
+//         if(evenOdd==0){
+//           sum+=i-10000;
+//         }
+//        evenOdd^=1;
+//      }
+//   }
+//   return sum;
+// };
+
+console.log(arrayPairSum([1,4,3,2]));
