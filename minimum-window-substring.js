@@ -1,67 +1,48 @@
+// Attempts: 6
+
+// Given a string S and a string T, find the minimum window in S which will contain all the characters in T in complexity O(n).
+// 
+// Example:
+// 
+// Input: S = "ADOBECODEBANC", T = "ABC"
+// Output: "BANC"
+// Note:
+// 
+// If there is no such window in S that covers all characters in T, return the empty string "".
+// If there is such window, you are guaranteed that there will always be only one unique minimum window in S.
+
 var minWindow = function(s, t) {
-  if (s.length === 0 || t.length === 0) return "";
+  var [r,l] = [0,0]; 
   var dict = {};
-  // create a dictionary
+  var min = Infinity;
+  var ans = "";
+
   for (var i=0; i<t.length; i++) {
-    var char = t[i];
-    if (dict[char] === undefined) {
-        dict[char]=1;
-    } else {
-        dict[char]++;
+    var c=t[i];
+    dict[c] = dict[c] || 0;
+    dict[c]++;
+  }
+
+  var counter = Object.keys(dict).length;
+  while (r<s.length) {
+    var c=s[r];
+    if (dict[c] != undefined) dict[c]--;
+    if (dict[c] === 0) counter--;
+
+    while (counter === 0) {
+      var lC = s[l];
+      if (dict[lC] != undefined) dict[lC]++;
+      if (dict[lC] > 0) counter++;
+      if (min > r-l+1) {
+        ans = s.substring(l, r+1);
+        min = ans.length;
+      }
+      l++;
     }
+    r++;
   }
   
-  var smap = dict;
-  var q = [];
-  var minWord = '';
-  for(var x=0; x<s.length; x++) {
-    var char = s[x];
-    // create queue of relevant chars
-    if (smap[char] !== undefined) {
-      var charIdx={};
-      charIdx[char] = x;
-      q.push(charIdx);
-      smap[char]--;
-      if (smap[char] < 0) [smap, q] = trimTail(smap, q);
-
-      var validWord = true;
-      for (key in smap) {
-        if (smap[key] > 0) {
-          validWord = false;
-        }
-      }
-
-      if (validWord) {
-        newWord = getWord(s, q);
-        if (newWord.length < minWord.length || minWord.length == 0) {
-          minWord = newWord;
-        }
-      }
-    }
-  }
-  return minWord;
-};
-
-var trimTail = function(smap, queue) {
-  if (Object.keys(queue[queue.length-1])[0] != Object.keys(queue[0])[0]) return [smap, queue];
-
-  var isTail = true;
-  while (isTail) {
-    isTail = false;
-    var head = queue.shift();
-    var char = Object.keys(head)[0];
-    if (smap[char] < 0) {
-      smap[char]++;
-      isTail = true;
-    } else {
-      queue.unshift(head);
-    }
-  }
-  return [smap, queue];
+  return ans;
 }
 
-var getWord = function(s, queue) {
-  return s.slice(Object.values(queue[0])[0], Object.values(queue[queue.length-1])[0]+1);
-}
-
-console.log(minWindow('a','aa'));
+console.log(minWindow('a', 'aa'));
