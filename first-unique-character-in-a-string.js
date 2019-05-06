@@ -1,5 +1,4 @@
 var firstUniqChar = function(s) {
-  var s = s.split('');
   var hash = {};
   for (var i=0; i<s.length; i++) {
     if (!hash[s[i]]) {
