@@ -7,8 +7,10 @@ function findRotationPoint(words) {
     let half = Math.floor((max-min)/2);
     let guess = min + half;
 
+    // catures if a
     if (words[guess-1] > words[guess] ) {
       return guess;
+    // captures if z
     } else if (words[guess] > words[guess+1]) {
       return guess+1;
     }
@@ -41,6 +43,11 @@ actual = findRotationPoint(['ptolemaic', 'retrograde', 'supplant',
   'babka', 'banoffee', 'engender',
   'karpatka', 'othellolagkage']);
 expected = 5;
+assertEquals(actual, expected, desc);
+
+desc = 'sorted array';
+actual = findRotationPoint(['a', 'b', 'c', 'd', 'e']);
+expected = false;
 assertEquals(actual, expected, desc);
 
 function assertEquals(a, b, desc) {
