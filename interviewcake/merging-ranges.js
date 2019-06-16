@@ -11,6 +11,7 @@ function mergeIntervals(intervals) {
       }
     }
 
+    // if unmerged, add the new item to the list of ranges
     if (j === ranges.length) ranges = ranges.concat(intervals[i]);
   }
 
