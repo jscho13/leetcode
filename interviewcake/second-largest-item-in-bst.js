@@ -1,3 +1,42 @@
+
+// This solution is O(logn) and O(h)
+// How can you get this to O(1)?
+
+function findSecondLargest(root) {
+  if (root === null || root.left === null && root.right === null) return null;
+  var node = root;
+  var ans = node.val;
+  var rightQ = [];
+  var leftQ = [];
+
+  if (node.right) {
+    rightQ.push(node.right);
+  } else if (node.left) {
+    leftQ.push(node.left);
+  }
+
+  while (rightQ.length > 0) {
+    node = rightQ.shift();
+    if (node.right) {
+      ans = node.val;
+      rightQ.push(node.right);
+    } else if (node.left) {
+      leftQ.push(node.left);
+    }
+  }
+
+  while (leftQ.length > 0) {
+    node = leftQ.shift();
+    if (node.right) {
+      leftQ.push(node.right);
+    }
+    ans = node.val;
+  }
+  return ans;
+}
+
+
+// Tests
 class BinaryTreeNode {
   constructor(value) {
     this.val = value;
@@ -15,31 +54,6 @@ class BinaryTreeNode {
     return this.right;
   }
 }
-
-function findSecondLargest(root) {
-  if (root === null || (root.left === null && root.right === null)) return null;
-  var q = [root];
-  var vals = [Number.NEGATIVE_INFINITY, Number.NEGATIVE_INFINITY];
-  while (q.length > 0) {
-    var n = q.shift();
-    if (n != null) {
-      if (vals[0] < n.val && n.val < vals[1]) vals[0] = n.val;
-      if (vals[1] < n.val) {
-        if (vals[0] < vals[1]) vals[0] = vals[1];
-        vals[1] = n.val;
-      }
-      q.push(n.left);
-      q.push(n.right);
-    }
-  }
-
-  return vals[0];
-}
-
-// alternativly do BFS. if you find a new higher value you push it up
-// you can also do some pruning to reduce it to O(lg n)
-
-// Tests
 
 let desc = 'full tree';
 let treeRoot = new BinaryTreeNode(50);
