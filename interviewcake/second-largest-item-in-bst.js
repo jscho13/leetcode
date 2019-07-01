@@ -1,9 +1,6 @@
 
-// This solution is O(logn) and O(h)
-// How can you get this to O(1)?
-
 function findSecondLargest(root) {
-  if (root === null || root.left === null && root.right === null) return null;
+  if (!root || (!root.left && !root.right)) throw new Error('Nah')
   var node = root;
   var ans = node.val;
   var rightQ = [];
@@ -27,10 +24,8 @@ function findSecondLargest(root) {
 
   while (leftQ.length > 0) {
     node = leftQ.shift();
-    if (node.right) {
-      leftQ.push(node.right);
-    }
     ans = node.val;
+    if (node.right) leftQ.push(node.right);
   }
   return ans;
 }
@@ -111,11 +106,11 @@ assertEquals(findSecondLargest(treeRoot), 70, desc);
 
 desc = 'one node tree';
 treeRoot = new BinaryTreeNode(50);
-assertEquals(findSecondLargest(treeRoot), null, desc);
+assertThrowsError(() => findSecondLargest(treeRoot), desc);
 
 desc = 'when tree is empty';
 treeRoot = null;
-assertEquals(findSecondLargest(treeRoot), null, desc);
+assertThrowsError(() => findSecondLargest(treeRoot), desc);
 
 function assertEquals(a, b, desc) {
   if (a === b) {
