@@ -30,3 +30,7 @@ find-k-pairs-with-smallest-sums
 
 # aim for 50%
 minimum-window-substring
+
+# solve it with a stack
+shortest-unsorted-continuous-array
+
