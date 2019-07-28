@@ -7,9 +7,22 @@ class GraphNode {
 }
 
 function colorGraph(graph, colors) {
+  for(let i=0; i<graph.length; i++) {
+    let used = [];
+    giveColor(graph[i]);
+    graph[i].neighbors.forEach(n => { if (!n.color) giveColor(n) });
 
+    function giveColor(n) {
+      n.neighbors.forEach((x) => { if (x.color) used.push(x.color) });
+      let unused = colors.filter(color => !used.includes(color) );
+      let color = unused[0];
+      used.push(color);
+      n.color = color;
+    }
+  }
+
+  return graph;
 }
-
 
 
 
