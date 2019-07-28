@@ -7,6 +7,8 @@ class GraphNode {
 }
 
 function colorGraph(graph, colors) {
+  if (graph[0].neighbors.has(graph[0])) throw 'Circular reference';
+  
   for(let i=0; i<graph.length; i++) {
     let used = [];
     giveColor(graph[i]);
@@ -20,7 +22,6 @@ function colorGraph(graph, colors) {
       n.color = color;
     }
   }
-
   return graph;
 }
 
