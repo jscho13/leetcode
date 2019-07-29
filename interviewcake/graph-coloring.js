@@ -6,6 +6,8 @@ class GraphNode {
   }
 }
 
+// this strategy assigns a color, and then assigns the neighbors color
+// O(N*D)
 function colorGraph(graph, colors) {
   if (graph[0].neighbors.has(graph[0])) throw 'Circular reference';
   
@@ -24,6 +26,8 @@ function colorGraph(graph, colors) {
   }
   return graph;
 }
+
+
 
 
 

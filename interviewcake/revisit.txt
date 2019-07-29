@@ -1,0 +1,7 @@
+These were so bad you need to do them all over again:
+highest-product-of-3
+find-repeat-space-edition
+
+Optimize these since the breakdown reading made you realized yours is garbage:
+bst-checker - current solution is O(n^2), do one in O(n)
+graph-coloring - current solution is O(N*D), find O(N+M)
