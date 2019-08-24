@@ -5,3 +5,8 @@ find-repeat-space-edition
 Optimize these since the breakdown reading made you realized yours is garbage:
 bst-checker - current solution is O(n^2), do one in O(n)
 graph-coloring - current solution is O(N*D), find O(N+M)
+largest-stack - the solution you did has O(n) push and pop. there's an O(1) solution
+queue-two-stacks - came up with a O(n^2) solution. Find the O(n) solution
+
+Best solution, but could be heavily refactored:
+bracket-validator
