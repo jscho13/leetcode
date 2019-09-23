@@ -1,0 +1,11 @@
+data model
+link -> short url, long url
+insert and make sure there are no collisions
+n^62 availabe characters... like some 5 trillion
+nosql is flatter, sql probably isn't a good choice here
+read faster by putting more in memory
+LRU cache or sharding (split by key)
+adding a cache will add more complexity. you need to keep the db and cache in sync
+db's will also need to handle multiple connections. but all of them come with that by default
+load balancer to split among multiple front end workers
+
