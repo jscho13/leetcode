@@ -1,52 +1,72 @@
+function highestProductOf3(arrayOfInts) {
 
-function productOf3(nums) {
-  let [min, max] = [[nums[0]], [nums[0]]];
+  // Calculate the highest product of three numbers
+  
 
-  for (let i=1; i<nums.length; i++) {
-    let n = nums[i];
-    max = insertMax(max, n)
-    min = insertMin(min, n)
-  }
-
-  if (min[0] * min[1] > max[0] * max[1]) {
-    max[0] = min[0];
-    max[1] = min[1];
-  }
-
-  return max.reduce((a,b) => a*b)
+  return 0;
 }
 
-function insertMax(max, n) {
-  let newMax = [];
-  let inserted = false;
-  for (let j=max.length; j>0; j--) {
-    let num = max[j-1];
-    if (n>num && inserted == false) {
-      newMax.unshift(n);
-      newMax.unshift(num);
-      inserted = true;
-    } else {
-      newMax.unshift(num);
-    }
+
+
+
+
+
+
+
+
+
+// Tests
+
+let desc = 'short array';
+let actual = highestProductOf3([1, 2, 3, 4]);
+let expected = 24;
+assertEqual(actual, expected, desc);
+
+desc = 'longer array';
+actual = highestProductOf3([6, 1, 3, 5, 7, 8, 2]);
+expected = 336;
+assertEqual(actual, expected, desc);
+
+desc = 'array has one negative';
+actual = highestProductOf3([-5, 4, 8, 2, 3]);
+expected = 96;
+assertEqual(actual, expected, desc);
+
+desc = 'array has two negatives';
+actual = highestProductOf3([-10, 1, 3, 2, -10]);
+expected = 300;
+assertEqual(actual, expected, desc);
+
+desc = 'array is all negatives';
+actual = highestProductOf3([-5, -1, -3, -2]);
+expected = -6;
+assertEqual(actual, expected, desc);
+
+desc = 'error with empty array';
+const emptyArray = () => (highestProductOf3([]));
+assertThrowsError(emptyArray, desc);
+
+desc = 'error with one number';
+const oneNumber = () => (highestProductOf3([1]));
+assertThrowsError(oneNumber, desc);
+
+desc = 'error with two numbers';
+const twoNumber = () => (highestProductOf3([1, 1]));
+assertThrowsError(twoNumber, desc);
+
+function assertEqual(a, b, desc) {
+  if (a === b) {
+    console.log(`${desc} ... PASS`);
+  } else {
+    console.log(`${desc} ... FAIL: ${a} != ${b}`)
   }
-  if (inserted == false) newMax.unshift(n);
-  if (newMax.length > 3) newMax.shift();
-  return newMax;
 }
 
-function insertMin(min, n) {
-  if (min.length === 0) {
-    min.push(n);
-  } else if (min.length === 1) {
-    (n < min[0]) ? min.unshift(n) : min.push(n);
-  } else if (n < min[0]) {
-    min.unshift(n);
-    min.pop();
-  } else if (n < min[1]) {
-    min[1] = n;
+function assertThrowsError(func, desc) {
+  try {
+    func();
+    console.log(`${desc} ... FAIL`);
+  } catch (e) {
+    console.log(`${desc} ... PASS`);
   }
-  return min;
 }
-
-console.log(productOf3([1,2,3,5])); // 30
-console.log(productOf3([1,-2,-3,5])); // 30
