@@ -1,10 +1,28 @@
 function highestProductOf3(arrayOfInts) {
-
   // Calculate the highest product of three numbers
-  
+  if (arrayOfInts.length < 3) throw 'array is too short';
+  let bot2 = arrayOfInts.slice(0,2);
+  let top3 = arrayOfInts.splice(0,3);
 
-  return 0;
+  for (var i=0; i<arrayOfInts.length; i++) {
+    let min = Math.min(...top3);
+    let max = Math.max(...bot2);
+
+    let minIdx = top3.indexOf(min);
+    let maxIdx = bot2.indexOf(max);
+
+    let num = arrayOfInts[i];
+
+    if (min < num) top3[minIdx] = num;
+    if (max > num) bot2[maxIdx] = num;
+  }
+
+  let total2 = bot2.reduce((a, b) => { return a*b }, Math.max(...top3) );
+  let total = top3.reduce((a, b) => a*b );
+
+  return (total > total2) ? total : total2;
 }
+
 
 
 
