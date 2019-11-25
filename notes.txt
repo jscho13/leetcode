@@ -1,0 +1,19 @@
+Binary search:
+
+When going through the list there's extra if/else logic for the first and last element
+It's way cleaner to do a while loop.
+
+function binarySearch() {
+  // set stuff here
+
+  while (leftIndex < rightIndex) {
+    // move the leftIndex up or rightIndex down accordingly
+
+    if (leftIndex+1 === rightIndex) {
+      // you know you're at the end of the list so get out of the loop
+      break;
+    }
+  }
+
+  return rightIndex;
+}

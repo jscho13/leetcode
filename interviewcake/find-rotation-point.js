@@ -1,4 +1,15 @@
 
+// O(log n)
+// S(log n)
+
+/*
+  if you put this in a while loop
+  there's no recursion. so it ends up
+  being S(1) or linear time
+  even better!
+*/
+
+
 const findRotationPoint = (words) => {
   // Find the rotation point in the vector
 	if (words.length < 2) return false;
