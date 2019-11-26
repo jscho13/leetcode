@@ -1,12 +1,5 @@
 function findRepeat(inputAry) {
-  let sum = 0;
-  let minusOne = 0;
-  for (let i=0; i<inputAry.length; i++) {
-    sum += inputAry[i];
-    minusOne += i;
-  }
 
-  return sum - minusOne;
 }
 
 
