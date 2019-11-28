@@ -17,3 +17,41 @@ function binarySearch() {
 
   return rightIndex;
 }
+
+
+# do this in javascript
+longest-univalue-path
+
+# how are you supposed to get the key idea here?
+shortest-palindrome
+
+# solved but very slow
+first-unique-character-in-a-string
+
+# solve this manually without sort
+merge-k-sorted-lists
+
+# excellent tree practice
+validate-binary-search-tree
+
+# try and do it with DLL
+lru-cache
+
+# try without sorting
+merge-intervals
+
+# try iterative version
+binary-tree-inorder-traversal
+
+# can you solve this in one line?
+maximum-depth-of-binary-tree
+
+# do this faster
+find-k-pairs-with-smallest-sums
+
+# aim for 50%
+minimum-window-substring
+
+# solve it with a stack
+shortest-unsorted-continuous-array
+
