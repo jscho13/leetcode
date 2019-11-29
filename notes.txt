@@ -1,3 +1,20 @@
+These were so bad you need to do them all over again:
+DONE: highest-product-of-3
+find-duplicate-optimize-for-space
+
+Solutions where runtime could be optimized:
+bst-checker - current solution is O(n^2), do one in O(n)
+graph-coloring - current solution is O(N*D), find O(N+M)
+largest-stack - the solution you did has O(n) push and pop. there's an O(1) solution
+queue-two-stacks - came up with a O(n^2) solution. Find the O(n) solution
+linked-list-cycles - lesson learned: a dictionary is S(n) space. The lookup is O(1), but it still takes up S(n) space.
+
+Solutions which were optimal, but can be refactored:
+bracket-validator
+delete-node
+
+
+
 Binary search:
 
 When going through the list there's extra if/else logic for the first and last element
