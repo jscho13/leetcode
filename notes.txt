@@ -1,6 +1,9 @@
+INTERVIEWCAKE
+------------------------------------------------------------------------
 These were so bad you need to do them all over again:
 DONE: highest-product-of-3
 find-duplicate-optimize-for-space
+merging-ranges
 
 Solutions where runtime could be optimized:
 bst-checker - current solution is O(n^2), do one in O(n)
@@ -36,6 +39,8 @@ function binarySearch() {
 }
 
 
+LEETCODE
+------------------------------------------------------------------------
 # do this in javascript
 longest-univalue-path
 
