@@ -1,52 +1,116 @@
-function mergeIntervals(intervals) {
-  intervals = intervals.sort(function(a, b) {
-    return a['startTime'] - b['startTime'];
-  });
-  let ranges = [];
-  for (var i=0; i<intervals.length; i++) {
-    for (var j=0; j<ranges.length; j++) {
-      if (overlapping(intervals[i], ranges[j])) {
-        ranges[j] = merge(intervals[i], ranges[j]);
-        break;
-      }
-    }
+// sort by startTime
+// merge into intervals as you go through
+// this is a greedy algorithim
 
-    // if unmerged, add the new item to the list of ranges
-    if (j === ranges.length) ranges = ranges.concat(intervals[i]);
+function mergeRanges(meetings) {
+  if (meetings.length === 1) return meetings;
+
+  meetings = meetings.sort(function (a,b) { return a.startTime-b.startTime; });
+  var ans = [meetings.shift()];
+
+  while (meetings.length > 0) {
+    var m = meetings.shift();
+    var idx = ans.length-1;
+    if (
+      m.startTime >= ans[idx].startTime
+      && m.startTime <= ans[idx].endTime
+    ) {
+      var end = Math.max(ans[idx].endTime, m.endTime);
+      ans[idx].endTime = end;
+    } else {
+      ans.push(m);
+    }
   }
 
-  return ranges;
-}
-
-function overlapping(a, b) {
-  return (a['endTime'] >= b['startTime'] && a['startTime'] <= b['endTime']);
-}
-
-function merge(a, b) {
-  const merged = { startTime: null, endTime: null };
-  merged['startTime'] = (a['startTime'] <= b['startTime']) ? a['startTime'] : b['startTime'];
-  merged['endTime'] = (a['endTime'] >= b['endTime']) ? a['endTime'] : b['endTime'];
-  return merged;
+  return ans;
 }
 
 
-const times = [
-  { startTime: 0,  endTime: 1 },
-  { startTime: 3,  endTime: 5 },
-  { startTime: 4,  endTime: 8 },
-  { startTime: 10, endTime: 12 },
-  { startTime: 9,  endTime: 10 },
-];
-const times2 = [{ startTime: 1, endTime: 2 }, { startTime: 2, endTime: 3 }]
-const times3 = [{ startTime: 1, endTime: 5 }, { startTime: 2, endTime: 3 }]
-const times4 = [
+
+
+
+// Tests
+
+let desc = 'meetings overlap';
+let actual = mergeRanges([{ startTime: 1, endTime: 3 }, { startTime: 2, endTime: 4 }]);
+let expected = [{ startTime: 1, endTime: 4 }];
+assertArrayEquals(actual, expected, desc);
+
+desc = 'meetings touch';
+actual = mergeRanges([{ startTime: 5, endTime: 6 }, { startTime: 6, endTime: 8 }]);
+expected = [{ startTime: 5, endTime: 8 }];
+assertArrayEquals(actual, expected, desc);
+
+desc = 'meeting contains other meeting';
+actual = mergeRanges([{ startTime: 1, endTime: 8 }, { startTime: 2, endTime: 5 }]);
+expected = [{ startTime: 1, endTime: 8 }];
+assertArrayEquals(actual, expected, desc);
+
+desc = 'meetings stay separate';
+actual = mergeRanges([{ startTime: 1, endTime: 3 }, { startTime: 4, endTime: 8 }]);
+expected = [{ startTime: 1, endTime: 3 }, { startTime: 4, endTime: 8 }];
+assertArrayEquals(actual, expected, desc);
+
+desc = 'multiple merged meetings';
+actual = mergeRanges([
+  { startTime: 1, endTime: 4 },
+  { startTime: 2, endTime: 5 },
+  { startTime: 5, endTime: 8 },
+]);
+expected = [{ startTime: 1, endTime: 8 }];
+assertArrayEquals(actual, expected, desc);
+
+desc = 'meetings not sorted';
+actual = mergeRanges([
+  { startTime: 5, endTime: 8 },
+  { startTime: 1, endTime: 4 },
+  { startTime: 6, endTime: 8 },
+]);
+expected = [{ startTime: 1, endTime: 4 }, { startTime: 5, endTime: 8 }];
+assertArrayEquals(actual, expected, desc);
+
+desc = 'oneLongMeetingContainsSmallerMeetings';
+actual = mergeRanges([
   { startTime: 1, endTime: 10 },
-  { startTime: 2, endTime: 6 },
-  { startTime: 3, endTime: 5 },
-  { startTime: 7, endTime: 9 },
+  { startTime: 2, endTime: 5 },
+  { startTime: 6, endTime: 8 },
+  { startTime: 9, endTime: 10 },
+  { startTime: 10, endTime: 12 }
+]);
+expected = [
+  { startTime: 1, endTime: 12 }
 ];
+assertArrayEquals(actual, expected, desc);
 
-console.log(mergeIntervals(times));
-console.log(mergeIntervals(times2));
-console.log(mergeIntervals(times3));
-console.log(mergeIntervals(times4));
+desc = 'sample input';
+actual = mergeRanges([
+  { startTime: 0, endTime: 1 },
+  { startTime: 3, endTime: 5 },
+  { startTime: 4, endTime: 8 },
+  { startTime: 10, endTime: 12 },
+  { startTime: 9, endTime: 10 },
+]);
+expected = [
+  { startTime: 0, endTime: 1 },
+  { startTime: 3, endTime: 8 },
+  { startTime: 9, endTime: 12 },
+];
+assertArrayEquals(actual, expected, desc);
+
+function assertArrayEquals(a, b, desc) {
+  // Sort the keys in each meeting to avoid
+  // failing based on differences in key order.
+  orderedA = a.map( function(meeting) {
+    return JSON.stringify(meeting, Object.keys(meeting).sort());
+  });
+  orderedB = b.map( function(meeting) {
+    return JSON.stringify(meeting, Object.keys(meeting).sort());
+  });
+  const arrayA = JSON.stringify(orderedA);
+  const arrayB = JSON.stringify(orderedB);
+  if (arrayA !== arrayB) {
+    console.log(`${desc} ... FAIL: ${JSON.stringify(a)} != ${JSON.stringify(b)}`)
+  } else {
+    console.log(`${desc} ... PASS`);
+  }
+}
