@@ -1,9 +1,32 @@
 function getPermutations(string) {
+  if (string.length === 0) return new Set(['']);
+  if (string.length === 1) return new Set([string]);
 
-  // Generate all permutations of the input string
+  var ans = new Set();
+  string = string.split('');
+  for(var i=0; e<string.length; e++) {
+    getSwaps(string, 0)
+  }
 
-  return new Set();
+  function getSwaps(string, s) {
+    ans.add(string.join(''));
+    if (s === string.length-1) return;
+
+    for(var e=s+1; e<string.length; e++) {
+      var temp = string[s];
+      string[s] = string[e]
+      string[e] = temp;
+
+      getSwaps(string, s+1);
+
+      string[e] = string[s];
+      string[s] = temp;
+    }
+  }
+
+  return ans;
 }
+
 
 
 

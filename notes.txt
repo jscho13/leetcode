@@ -13,6 +13,7 @@ linked-list-cycles - lesson learned: a dictionary is S(n) space. The lookup is O
 Solutions which were optimal, but can be refactored:
 bracket-validator
 delete-node
+recursive-string-permutations
 
 Solutions you didn't get:
 find-duplicate-optimize-for-space
