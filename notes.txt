@@ -3,7 +3,8 @@ INTERVIEWCAKE
 DONE: highest-product-of-3
 DONE: merging-ranges
 
-Solutions where runtime could be optimized:
+
+OPTIMIZE
 5. bst-checker - current solution is O(n^2), do one in O(n)
 5. graph-coloring - current solution is O(N*D), find O(N+M)
 largest-stack - the solution you did has O(n) push and pop. there's an O(1) solution
@@ -12,18 +13,21 @@ linked-list-cycles - lesson learned: a dictionary is S(n) space. The lookup is O
 nth-fib - O(n) and S(n). There is O(n) and S(1).
 mesh-message - calculated O(n+M) incorrectly
 
-Solutions which were optimal, but can be refactored:
+
+REFACTOR
 bracket-validator
 delete-node
 recursive-string-permutations
 mesh-message
 
-Solutions you didn't get:
+
+FAILED
 find-duplicate-optimize-for-space
 
 
 
 
+NOTES
 Binary search:
 
 When going through the list there's extra if/else logic for the first and last element
@@ -43,6 +47,40 @@ function binarySearch() {
 
   return rightIndex;
 }
+
+
+BST:
+// Assume we have an efficient queue implementation, Queue()
+// with enqueue and dequeue methods and a size property
+
+function bfs(graph, startNode, endNode) {
+
+  const nodesToVisit = new Queue();
+  nodesToVisit.enqueue(startNode);
+
+  // Keep track of what nodes we've already seen
+  // so we don't process them twice
+  const nodesAlreadySeen = new Set([startNode]);
+
+  while (nodesToVisit.size > 0) {
+    const currentNode = nodesToVisit.dequeue();
+
+    // Stop when we reach the end node
+    if (currentNode === endNode) {
+
+      // Found it!
+      break;
+    }
+
+    graph[currentNode].forEach(neighbor => {
+      if (!nodesAlreadySeen.has(neighbor)) {
+        nodesAlreadySeen.add(neighbor);
+        nodesToVisit.enqueue(neighbor);
+      }
+    });
+  }
+}
+
 
 
 LEETCODE
