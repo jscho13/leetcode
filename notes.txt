@@ -5,20 +5,22 @@ DONE: merging-ranges
 
 
 OPTIMIZE
-5. bst-checker - current solution is O(n^2), do one in O(n)
+5/6 bst-checker - current solution is O(n^2), do one in O(n)
 5. graph-coloring - current solution is O(N*D), find O(N+M)
 largest-stack - the solution you did has O(n) push and pop. there's an O(1) solution
 queue-two-stacks - came up with a O(n^2) solution. Find the O(n) solution
 linked-list-cycles - lesson learned: a dictionary is S(n) space. The lookup is O(1), but it still takes up S(n) space.
 nth-fib - O(n) and S(n). There is O(n) and S(1).
 mesh-message - calculated O(n+M) incorrectly
+6. cake-thief - came up with O(n^2) S(n). there is O(n*m) S(k)
 
 
 REFACTOR
 bracket-validator
 delete-node
-recursive-string-permutations
+6. recursive-string-permutations
 mesh-message
+6. balanced-binary-tree
 
 
 FAILED
