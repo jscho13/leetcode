@@ -18,10 +18,18 @@ class BinaryTreeNode {
 
 
 function isBinarySearchTree(treeRoot) {
-  // Determine if the tree is a valid binary search tree
-  
+  let n = treeRoot;
 
-  return false;
+  function dfs(n, rootVal, dir) {
+    if (n === null) return true;
+    if (n.val > rootVal && dir === 'l') return false;
+    if (n.val < rootVal && dir === 'r') return false;
+    if (n.val === rootVal) return false;
+
+    return dfs(n.left, n.val, 'l') && dfs(n.right, n.val, 'r');
+  }
+
+  return dfs(n.left, n.val, 'l') && dfs(n.right, n.val, 'r');
 }
 
 
@@ -100,5 +108,4 @@ function assertEquals(a, b, desc) {
 // 
 //   return checkAll(n.left, val, dir) && checkAll(n.right, val, dir);
 // }
-// 
-// 
+
