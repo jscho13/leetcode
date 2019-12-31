@@ -16,26 +16,62 @@ class BinaryTreeNode {
   }
 }
 
-function isBalanced(root) {
-  let queue = [root];
-  let level = 0;
-  let topLevel = null;
-  while (queue.length > 0) {
-    let ncount = queue.length;
-    level++;
-    while (ncount > 0) {
-      let node = queue.shift();
-      ncount--;
 
-      if (node.left === null && node.right === null && !topLevel) {
-        topLevel = level;
-      }
-      if (node.left) queue.push(node.left);
-      if (node.right) queue.push(node.right);
+// dfs
+function isBalanced(treeRoot) {
+  let initLevel = 0;
+  let min = null;
+
+  function dfs(node, level) {
+    let left = 0;
+    let right = 0;
+    if (node) {
+      level++;
+      left = dfs(node.left, level);
+      right = dfs(node.right, level);
+      if (!node.left && !node.right && !min) min = level;
     }
+    return Math.max(level, left, right);
   }
-  return (level - topLevel <= 1) ? true : false;
+
+  initLevel = dfs(treeRoot, initLevel)
+  return (initLevel-min > 1) ? false : true;
 }
+
+
+// bfs
+// function isBalanced(root) {
+//   let queue = [root];
+//   let level = 0;
+//   let topLevel = null;
+//   while (queue.length > 0) {
+//     let ncount = queue.length;
+//     level++;
+//     while (ncount > 0) {
+//       let node = queue.shift();
+//       ncount--;
+// 
+//       if (node.left === null && node.right === null && !topLevel) {
+//         topLevel = level;
+//       }
+//       if (node.left) queue.push(node.left);
+//       if (node.right) queue.push(node.right);
+//     }
+//   }
+//   return (level - topLevel <= 1) ? true : false;
+// }
+// 
+// 
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -113,3 +149,12 @@ function assertEquals(a, b, desc) {
     console.log(`${desc} ... FAIL: ${a} != ${b}`)
   }
 }
+
+
+
+
+
+
+
+
+

@@ -18,23 +18,17 @@ class BinaryTreeNode {
 
 
 function isBinarySearchTree(treeRoot) {
-  let left, right;
-  let n = treeRoot;
-  if (n === null) return true;
-  if (checkAll(n.left, n.val, 'l') === false) return false;
-  if (checkAll(n.right, n.val, 'r') === false) return false;
+  // Determine if the tree is a valid binary search tree
+  
 
-  return isBinarySearchTree(n.left) && isBinarySearchTree(n.right);
+  return false;
 }
 
-function checkAll(root, val, dir) {
-  let n = root;
-  if (n === null) return true;
-  if (n.val > val && dir === 'l') return false;
-  if (n.val < val && dir === 'r') return false;
 
-  return checkAll(n.left, val, dir) && checkAll(n.right, val, dir);
-}
+
+
+
+
 
 
 // Tests
@@ -85,3 +79,26 @@ function assertEquals(a, b, desc) {
     console.log(`${desc} ... FAIL: ${a} != ${b}`)
   }
 }
+
+
+// Old solution
+// function isBinarySearchTree(treeRoot) {
+//   let left, right;
+//   let n = treeRoot;
+//   if (n === null) return true;
+//   if (checkAll(n.left, n.val, 'l') === false) return false;
+//   if (checkAll(n.right, n.val, 'r') === false) return false;
+// 
+//   return isBinarySearchTree(n.left) && isBinarySearchTree(n.right);
+// }
+// 
+// function checkAll(root, val, dir) {
+//   let n = root;
+//   if (n === null) return true;
+//   if (n.val > val && dir === 'l') return false;
+//   if (n.val < val && dir === 'r') return false;
+// 
+//   return checkAll(n.left, val, dir) && checkAll(n.right, val, dir);
+// }
+// 
+// 

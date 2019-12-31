@@ -2,10 +2,11 @@ INTERVIEWCAKE
 ------------------------------------------------------------------------
 DONE: highest-product-of-3
 DONE: merging-ranges
+DONE: balanced-binary-tree
 
 
 OPTIMIZE
-5/6 bst-checker - current solution is O(n^2), do one in O(n)
+6. bst-checker - current solution is O(n^2), do one in O(n)
 5. graph-coloring - current solution is O(N*D), find O(N+M)
 largest-stack - the solution you did has O(n) push and pop. there's an O(1) solution
 queue-two-stacks - came up with a O(n^2) solution. Find the O(n) solution
@@ -20,7 +21,6 @@ bracket-validator
 delete-node
 6. recursive-string-permutations
 mesh-message
-6. balanced-binary-tree
 
 
 FAILED
