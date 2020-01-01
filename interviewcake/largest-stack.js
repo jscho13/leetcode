@@ -1,46 +1,25 @@
 // Implement the push, pop, and getMax methods
-
 class MaxStack {
   constructor() {
-		this.stack = new Stack();
-		this.max = [];
+
   }
 
   push(item) {
-		if (this.max.length === 0) {
-			this.max.push(item);
-		} else {
-			// insert in proper location
-			for (var i=0; i<this.max.length; i++) {
-				if (item >= this.max[i]) { 
-					this.max.splice(i, 0, item);
-					break;
-				}
-			}
-		}
-		this.stack.push(item);
+
   }
 
   pop() {
-		let num = this.stack.pop();
-		// remove in proper location
-		for (var i=0; i<this.max.length; i++) {
-			if (this.max[i] === num) { 
-				this.max.splice(i, 1);
-				break;
-			}
-		}
-		return num;	
+    return 0;
   }
 
   getMax() {
-		if (!this.max[0]) return null;
-    return this.max[0];
+    return 0;
   }
 }
 
 class Stack {
   constructor() {
+
     // Initialize an empty stack
     this.items = [];
   }
@@ -52,6 +31,7 @@ class Stack {
 
   // Remove and return the last item
   pop() {
+
     // If the stack is empty, return null
     // (It would also be reasonable to throw an exception)
     if (!this.items.length) {
@@ -68,6 +48,11 @@ class Stack {
     return this.items[this.items.length - 1];
   }
 }
+
+
+
+
+
 
 
 
@@ -100,3 +85,76 @@ function assertEquals(a, b, desc) {
     console.log(`${desc} ... FAIL: ${a} != ${b}`);
   }
 }
+
+
+
+
+// Old solution
+// class MaxStack {
+//   constructor() {
+// 		this.stack = new Stack();
+// 		this.max = [];
+//   }
+// 
+//   push(item) {
+// 		if (this.max.length === 0) {
+// 			this.max.push(item);
+// 		} else {
+// 			// insert in proper location
+// 			for (var i=0; i<this.max.length; i++) {
+// 				if (item >= this.max[i]) { 
+// 					this.max.splice(i, 0, item);
+// 					break;
+// 				}
+// 			}
+// 		}
+// 		this.stack.push(item);
+//   }
+// 
+//   pop() {
+// 		let num = this.stack.pop();
+// 		// remove in proper location
+// 		for (var i=0; i<this.max.length; i++) {
+// 			if (this.max[i] === num) { 
+// 				this.max.splice(i, 1);
+// 				break;
+// 			}
+// 		}
+// 		return num;	
+//   }
+// 
+//   getMax() {
+// 		if (!this.max[0]) return null;
+//     return this.max[0];
+//   }
+// }
+// 
+// class Stack {
+//   constructor() {
+//     // Initialize an empty stack
+//     this.items = [];
+//   }
+// 
+//   // Push a new item onto the stack
+//   push(item) {
+//     this.items.push(item);
+//   }
+// 
+//   // Remove and return the last item
+//   pop() {
+//     // If the stack is empty, return null
+//     // (It would also be reasonable to throw an exception)
+//     if (!this.items.length) {
+//       return null;
+//     }
+//     return this.items.pop();
+//   }
+// 
+//   // Return the last item without removing it
+//   peek() {
+//     if (!this.items.length) {
+//       return null;
+//     }
+//     return this.items[this.items.length - 1];
+//   }
+// }

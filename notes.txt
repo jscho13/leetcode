@@ -3,10 +3,10 @@ INTERVIEWCAKE
 DONE: highest-product-of-3
 DONE: merging-ranges
 DONE: balanced-binary-tree
+DONE: bst-checker -> can be refactored even a bit more... but good enough
 
 
 OPTIMIZE
-6. bst-checker - current solution is O(n^2), do one in O(n)
 5. graph-coloring - current solution is O(N*D), find O(N+M)
 largest-stack - the solution you did has O(n) push and pop. there's an O(1) solution
 queue-two-stacks - came up with a O(n^2) solution. Find the O(n) solution
@@ -21,11 +21,12 @@ bracket-validator
 delete-node
 6. recursive-string-permutations
 mesh-message
+6. second-largest-item-in-bst -> I think you did this right but your implementation just looks bad
 
 
 FAILED
 find-duplicate-optimize-for-space
-making-change
+6. making-change
 
 
 
@@ -84,6 +85,12 @@ function bfs(graph, startNode, endNode) {
   }
 }
 
+
+
+DFS:
+Space-complexity of DFS is height of the tree...
+while the space-complexity of BFS is the depth of the tree... makes sense yeah?
+Height of tree can be calculated via S(log n) didn't know that!
 
 
 LEETCODE

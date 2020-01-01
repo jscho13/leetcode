@@ -17,20 +17,28 @@ class BinaryTreeNode {
 }
 
 
+// O(n)
+// S(h) -> h is height of the tree
+
 function isBinarySearchTree(treeRoot) {
   let n = treeRoot;
 
-  function dfs(n, rootVal, dir) {
+  function dfs(n, rootVal, dir, max, min) {
     if (n === null) return true;
-    if (n.val > rootVal && dir === 'l') return false;
-    if (n.val < rootVal && dir === 'r') return false;
-    if (n.val === rootVal) return false;
+    if (dir === 'l') {
+      if (n.val <= min || n.val >= rootVal ) return false;
+      max = rootVal;
+    } else {
+      if (n.val >= max || n.val <= rootVal ) return false;
+      min = rootVal;
+    }
 
-    return dfs(n.left, n.val, 'l') && dfs(n.right, n.val, 'r');
+    return dfs(n.left, n.val, 'l', max, min) && dfs(n.right, n.val, 'r', max, min);
   }
 
-  return dfs(n.left, n.val, 'l') && dfs(n.right, n.val, 'r');
+  return dfs(n.left, n.val, 'l', Number.POSITIVE_INFINITY, Number.NEGATIVE_INFINITY) && dfs(n.right, n.val, 'r', Number.POSITIVE_INFINITY, Number.NEGATIVE_INFINITY);
 }
+
 
 
 
