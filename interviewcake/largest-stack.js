@@ -1,25 +1,34 @@
-// Implement the push, pop, and getMax methods
+
 class MaxStack {
   constructor() {
-
+    this.stack = new Stack();
+    this.max = new Stack(); 
   }
 
   push(item) {
-
+    this.stack.push(item);
+    let max = this.max.peek(); 
+    if (item >= max) {
+      this.max.push(item);
+    }
   }
 
   pop() {
-    return 0;
+    let item = this.stack.pop();
+    if (item === this.max.peek()) {
+      this.max.pop();
+    }
+    
+    return item;
   }
 
   getMax() {
-    return 0;
+    return this.max.peek();
   }
 }
 
 class Stack {
   constructor() {
-
     // Initialize an empty stack
     this.items = [];
   }
@@ -31,7 +40,6 @@ class Stack {
 
   // Remove and return the last item
   pop() {
-
     // If the stack is empty, return null
     // (It would also be reasonable to throw an exception)
     if (!this.items.length) {
@@ -68,6 +76,8 @@ s.push(7);
 s.push(7);
 s.push(8);
 
+// 5, 4, 7, 7, 8
+
 assertEquals(8, s.getMax(), 'check before 1st pop');
 assertEquals(8, s.pop(), 'check pop #1');
 assertEquals(7, s.getMax(), 'check max after 1st pop');
@@ -77,6 +87,9 @@ assertEquals(7, s.pop(), 'check pop #3');
 assertEquals(5, s.getMax(), 'check max after 3rd pop');
 assertEquals(4, s.pop(), 'check pop #4');
 assertEquals(5, s.getMax(), 'check max after 4th pop');
+assertEquals(5, s.pop(), 'check max after 5th pop');
+assertEquals(null, s.pop(), 'check max after 6th pop');
+assertEquals(null, s.pop(), 'check max after 7th pop');
 
 function assertEquals(a, b, desc) {
   if (a === b) {

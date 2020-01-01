@@ -4,11 +4,11 @@ DONE: highest-product-of-3
 DONE: merging-ranges
 DONE: balanced-binary-tree
 DONE: bst-checker -> can be refactored even a bit more... but good enough
+DONE: largest-stack
 
 
 OPTIMIZE
 5. graph-coloring - current solution is O(N*D), find O(N+M)
-largest-stack - the solution you did has O(n) push and pop. there's an O(1) solution
 queue-two-stacks - came up with a O(n^2) solution. Find the O(n) solution
 linked-list-cycles - lesson learned: a dictionary is S(n) space. The lookup is O(1), but it still takes up S(n) space.
 nth-fib - O(n) and S(n). There is O(n) and S(1).
