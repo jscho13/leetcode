@@ -1,30 +1,32 @@
 //  Implement the enqueue and dequeue methods
-
 class QueueTwoStacks {
-  constructor () {
+  constructor() {
     this.stack1 = [];
     this.stack2 = [];
   }
 
   enqueue(item) {
-    while (this.stack1.length > 0) {
-      var num = this.stack1.pop();
-      this.stack2.push(num);
-    }
-
     this.stack1.push(item);
-
-    while (this.stack2.length > 0) {
-      var num2 = this.stack2.pop();
-      this.stack1.push(num2);
-    }
   }
 
   dequeue() {
-    if (this.stack1.length === 0) throw new Error('The stack is already empty');
-    return this.stack1.pop();
+    if (this.stack1.length === 0 && this.stack2.length === 0) {
+      throw new Error(); 
+    }
+
+    if (this.stack2.length === 0) {
+      while (this.stack1.length > 0) {
+        this.stack2.push(this.stack1.pop());
+      }
+    }
+
+    return this.stack2.pop();
   }
 }
+
+
+
+
 
 
 
@@ -78,3 +80,33 @@ function assertThrowsError(func, desc) {
     console.log(`${desc} ... PASS`);
   }
 }
+
+
+
+// Old implementation... O(n) and S(n)
+// there is an O(m) solution where m is # of calls
+// class QueueTwoStacks {
+//   constructor () {
+//     this.stack1 = [];
+//     this.stack2 = [];
+//   }
+// 
+//   enqueue(item) {
+//     while (this.stack1.length > 0) {
+//       var num = this.stack1.pop();
+//       this.stack2.push(num);
+//     }
+// 
+//     this.stack1.push(item);
+// 
+//     while (this.stack2.length > 0) {
+//       var num2 = this.stack2.pop();
+//       this.stack1.push(num2);
+//     }
+//   }
+// 
+//   dequeue() {
+//     if (this.stack1.length === 0) throw new Error('The stack is already empty');
+//     return this.stack1.pop();
+//   }
+// }
