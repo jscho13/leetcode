@@ -6,19 +6,7 @@ class LinkedListNode {
 }
 
 function deleteNode(nodeToDelete) {
-  let node = nodeToDelete;
-  let temp = null;
 
-  while (node) {
-    let next = node.next;
-    if (next == null) {
-      temp.next = null;
-    } else {
-      node.value = next.value;
-      temp = node;
-    }
-    node = node.next;
-  }
 }
 
 

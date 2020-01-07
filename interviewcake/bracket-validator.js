@@ -1,30 +1,33 @@
 function isValid(code) {
 	let q = [];
-	let open = ['[', '{', '('];
-	let closed = [']', '}', ')'];
+	let map1 = {
+    '[': ']',
+    '{': '}',
+    '(': ')'
+  };
+
+	let map2= {
+    ']': '[',
+    '}': '{',
+    ')': '('
+	}
 
 	for (var i=0; i<code.length;i++) {
-		if (open.includes(code[i])) {
-			q.push(code[i]);
-		}
-		if (closed.includes(code[i])) {
-			const close = q.pop();
-			if (close === '[' && code[i] !== ']') {
-				return false;
-			} else if (close === '{' && code[i] !== '}') {
-				return false;
-			} else if (close === '(' && code[i] !== ')') {
-				return false;
-			} else if (close === undefined) {
-				return false;
-			}
+		let ch = code[i];
+		if (map1[ch]) q.push(ch);
+
+		if (map2[ch]) {
+			let close = q.pop();
+      if (close != map2[ch] || close === undefined) return false;
 		}
 	}
 
 	if (q.length > 0) return false;
-
   return true;
 }
+
+
+
 
 
 // Tests
@@ -42,6 +45,9 @@ assertEqual(isValid('[[]()'), false, desc);
 
 desc = 'extra closer';
 assertEqual(isValid('[[]]())'), false, desc);
+
+desc = 'extra opener';
+assertEqual(isValid('([[]]()'), false, desc);
 
 desc = 'empty string';
 assertEqual(isValid(''), true, desc);

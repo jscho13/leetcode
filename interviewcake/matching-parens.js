@@ -1,26 +1,21 @@
-/*
-Optimal solution would be:
-	O(n)
-	S(1)
-*/ 
 
 function getClosingParen(sentence, openingParenIndex) {
   // Find the position of the matching closing parenthesis
-	let q = [];
-	for (let i=openingParenIndex; i<sentence.length; i++) {
-		let val = sentence[i];
-		if (val === '(') {
-			q.push(val);
-		} else if (val === ')') {
-			q.pop();
-		}
+	sentence = sentence.split('');
+  let count = 1;
+  let i=openingParenIndex;
+	for (; i<sentence.length; i++) {
+    if (sentence[i] === '(') count++;
+    if (sentence[i] === ')') count--;
+    if (count === 1) break;
+  }
 
-		if (q.length === 0) return i;
-	}
-
-	if (q.length > 0) throw Error;
-  return 0;
+  if (count > 1) throw new Error();
+  return i;
 }
+
+
+
 
 // Tests
 
@@ -54,3 +49,23 @@ function assertThrowsError(func, desc) {
     console.log(`${desc} ... PASS`);
   }
 }
+
+
+
+// function getClosingParen(sentence, openingParenIndex) {
+//   // Find the position of the matching closing parenthesis
+// 	let q = [];
+// 	for (let i=openingParenIndex; i<sentence.length; i++) {
+// 		let val = sentence[i];
+// 		if (val === '(') {
+// 			q.push(val);
+// 		} else if (val === ')') {
+// 			q.pop();
+// 		}
+// 
+// 		if (q.length === 0) return i;
+// 	}
+// 
+// 	if (q.length > 0) throw Error;
+//   return 0;
+// }
