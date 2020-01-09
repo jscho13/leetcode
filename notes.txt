@@ -5,28 +5,29 @@ DONE: merging-ranges
 DONE: balanced-binary-tree
 DONE: bst-checker -> can be refactored even a bit more... but good enough
 DONE: largest-stack
+DONE: queue-two-stacks
+DONE: matching-parens
+DONE: bracket-validator
 
 
 OPTIMIZE
 5. graph-coloring - current solution is O(N*D), find O(N+M)
-queue-two-stacks - came up with a O(n^2) solution. Find the O(n) solution
-linked-list-cycles - lesson learned: a dictionary is S(n) space. The lookup is O(1), but it still takes up S(n) space.
 nth-fib - O(n) and S(n). There is O(n) and S(1).
 mesh-message - calculated O(n+M) incorrectly
 6. cake-thief - came up with O(n^2) S(n). there is O(n*m) S(k)
+delete-node - O(n) solution. There is O(1) solution
 
 
 REFACTOR
-bracket-validator
-delete-node
 6. recursive-string-permutations
-mesh-message
 6. second-largest-item-in-bst -> I think you did this right but your implementation just looks bad
 
 
 FAILED
 find-duplicate-optimize-for-space
 6. making-change
+7. linked-list-cycles -> there is S(1) solution
+7. find-duplicate-optimize-for-space-beast-mode (actually didn't even attempt this)
 
 
 
