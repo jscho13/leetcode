@@ -28,6 +28,7 @@ find-duplicate-optimize-for-space
 6. making-change
 7. linked-list-cycles -> there is S(1) solution
 7. find-duplicate-optimize-for-space-beast-mode (actually didn't even attempt this)
+10. rectangular love -> shitty implementation
 
 
 

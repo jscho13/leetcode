@@ -6,18 +6,39 @@ class LinkedListNode {
 }
 
 function reverse(headOfList) {
-	let n1 = null;
-	let n2 = headOfList;
+  if (headOfList === null) return null;
+	let curr = null;
+	let nxt = headOfList;
+  let temp = nxt.next;
 
-	while (n2) {
-		let temp = n2.next;
-		n2.next = n1;
-		n1 = n2;
-    n2 = temp;
+	while (temp) {
+    nxt.next = curr;
+    curr = nxt;
+    nxt = temp;
+    temp = nxt.next;
 	}
 
-  return n1;
+  return nxt;
 }
+
+
+// cleaner solution you probably copied...
+// this one accounts for headOfList being null.
+// it doesn't go through the while loop and returns null right away.
+
+// function reverse(headOfList) {
+// 	let n1 = null;
+// 	let n2 = headOfList;
+// 
+// 	while (n2) {
+// 		let temp = n2.next;
+// 		n2.next = n1;
+// 		n1 = n2;
+//    n2 = temp;
+// 	}
+// 
+//   return n1;
+// }
 
 
 
