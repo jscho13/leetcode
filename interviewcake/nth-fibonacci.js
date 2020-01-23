@@ -1,14 +1,21 @@
+
 function fib(n) {
-  if (n<0) throw new Error;
-	let x=2;
-  let memo = [0,1];
-  while (x <= n & x > 1) {
-    memo[x] = memo[x-1] + memo[x-2];
-    x++;
+  if (n<0) {
+    throw new Error();
+  } else if (n == 0 || n == 1) {
+    return n;
   }
 
-  return memo[n];
+  let fib=[0,1];
+	for(let i=1; i<n; i++) {
+    next = fib[0] + fib[1];
+    fib[0] = fib[1];
+    fib[1] = next;
+	}
+	
+  return fib[1];
 }
+
 
 
 
@@ -65,3 +72,18 @@ function assertThrowsError(func, desc) {
     console.log(`${desc} ... PASS`);
   }
 }
+
+
+// O(n) and S(n)
+// function fib(n) {
+//   if (n<0) throw new Error;
+//   let x=2;
+//   let memo = [0,1];
+//   while (x <= n & x > 1) {
+//     memo[x] = memo[x-1] + memo[x-2];
+//     x++;
+//   }
+// 
+//   return memo[n];
+// }
+
