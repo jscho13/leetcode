@@ -1,29 +1,29 @@
-function maxDuffelBagValue(cakeTypes, weightCapacity) {
-  let ans = 0;
-  if (cakeTypes.length === 1 && cakeTypes[0].weight === 0) return Infinity;
 
-  for (var i=0; i<cakeTypes.length; i++) {
-    weight = 0;
-    value = 0;
-    sumWeights(i, weight, value);
+function maxDuffelBagValue(cakeTypes, weightCapacity) {
+  // Calculate the maximum value we can carry
+  let ans = 0;
+
+  let weights = new Array(weightCapacity+1).fill(0);
+  for (let i=0; i<cakeTypes.length; i++) {
+    let cake = cakeTypes[i];
+    if (cake.weight === 0 && cake.value != 0) return Infinity;
+    weights[cake.weight] = cake.value;
   }
 
-  function sumWeights(idx, weight, value) {
-    for (var x=idx; x<cakeTypes.length; x++) {
-      if (weight <= weightCapacity && cakeTypes[x].weight !=0) {
-        ans = Math.max(ans, value);
-
-        weight = weight + cakeTypes[x].weight;
-        value = value + cakeTypes[x].value;
-        sumWeights(x, weight, value);
+  for (let x=1; x<weights.length; x++) {
+    for (let y=0; y<cakeTypes.length; y++) {
+      let calcWeight = x + cakeTypes[y].weight;
+      let calcValue = weights[x] + cakeTypes[y].value;
+      if (calcWeight <= weightCapacity) {
+        let max = Math.max(weights[calcWeight], calcValue);
+        weights[calcWeight] = max;
+        ans = Math.max(ans, max);
       }
     }
   }
 
   return ans;
 }
-
-
 
 
 
@@ -102,3 +102,31 @@ function assertEqual(a, b, desc) {
     console.log(`${desc} ... FAIL: ${a} != ${b}`)
   }
 }
+
+// First attempt:
+// O(n^2) and S(n)
+// function maxDuffelBagValue(cakeTypes, weightCapacity) {
+//   let ans = 0;
+//   if (cakeTypes.length === 1 && cakeTypes[0].weight === 0) return Infinity;
+// 
+//   for (var i=0; i<cakeTypes.length; i++) {
+//     weight = 0;
+//     value = 0;
+//     sumWeights(i, weight, value);
+//   }
+// 
+//   function sumWeights(idx, weight, value) {
+//     for (var x=idx; x<cakeTypes.length; x++) {
+//       if (weight <= weightCapacity && cakeTypes[x].weight !=0) {
+//         ans = Math.max(ans, value);
+// 
+//         weight = weight + cakeTypes[x].weight;
+//         value = value + cakeTypes[x].value;
+//         sumWeights(x, weight, value);
+//       }
+//     }
+//   }
+// 
+//   return ans;
+// }
+
