@@ -8,27 +8,31 @@ DONE: largest-stack
 DONE: queue-two-stacks
 DONE: matching-parens
 DONE: bracket-validator
+DONE: nth-fib
+DONE: cake-thief
+DONE: delete-node
+DONE: second-largest-item-in-bst
+DONE: linked-list-cycles
+DONE: rectangular love
 
-
-OPTIMIZE
-5. graph-coloring - current solution is O(N*D), find O(N+M)
-nth-fib - O(n) and S(n). There is O(n) and S(1).
-mesh-message - calculated O(n+M) incorrectly
-6. cake-thief - came up with O(n^2) S(n). there is O(n*m) S(k)
-delete-node - O(n) solution. There is O(1) solution
-
-
-REFACTOR
-6. recursive-string-permutations
-6. second-largest-item-in-bst -> I think you did this right but your implementation just looks bad
 
 
 FAILED
-find-duplicate-optimize-for-space
-6. making-change
-7. linked-list-cycles -> there is S(1) solution
-7. find-duplicate-optimize-for-space-beast-mode (actually didn't even attempt this)
-10. rectangular love -> shitty implementation
+12. simulate-7-sided-die
+4. find-duplicate-optimize-for-space
+5. graph-coloring - current solution is O(N*D), find O(N+M)
+5. mesh-message - bad approach
+6. recursive-string-permutations
+5. find-duplicate-optimize-for-space-beast-mode
+6. coin
+11. find-unique-among-duplicates -> needed all the hints but got it
+12. shuffle.js
+
+
+
+
+
+
 
 
 
@@ -88,11 +92,17 @@ function bfs(graph, startNode, endNode) {
 }
 
 
-
 DFS:
 Space-complexity of DFS is height of the tree...
 while the space-complexity of BFS is the depth of the tree... makes sense yeah?
 Height of tree can be calculated via S(log n) didn't know that!
+
+
+Binary:
+Use right shift >>> for divide by 2 (>> appends a 1. it's good for 2's complement)
+And left shift << for multiply by 2
+XOR (^) is good for canceling things out
+
 
 
 LEETCODE

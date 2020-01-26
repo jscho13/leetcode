@@ -6,50 +6,24 @@ class LinkedListNode {
   }
 }
 
-function containsCycle(firstNode) {
-  try {
-    let slowRunner = firstNode;
-    let fastRunner = firstNode.next;
 
-    while (slowRunner) {
-      if (slowRunner === fastRunner) {
-        return true;
-      } else {
-        slowRunner = slowRunner.next; 
-        fastRunner = fastRunner.next.next;
-      }
+function containsCycle(firstNode) {
+  let first = firstNode;  
+  let second = firstNode;  
+
+  while(first) {
+    first = first.next;
+
+    if (second === null || second.next === null) return false;
+    second = second.next.next;
+
+    if (first === second) {
+      return true;
     }
   }
-  catch(e) {
-    return false;
-  }
+
+  return false;
 }
-
-
-
-// This is the way to do it without throwing an error
-// function containsCycle(firstNode) {
-//   // Start both runners at the beginning
-//   let slowRunner = firstNode;
-//   let fastRunner = firstNode;
-// 
-//   // Until we hit the end of the list
-//   while (fastRunner && fastRunner.next) {
-//     slowRunner = slowRunner.next;
-//     fastRunner = fastRunner.next.next;
-// 
-//     // Case: fastRunner is about to "lap" slowRunner
-//     if (fastRunner === slowRunner) {
-//       return true;
-//     }
-//   }
-// 
-//   // Case: fastRunner hit the end of the list
-//   return false;
-// }
-
-
-
 
 
 
@@ -108,3 +82,47 @@ function assertEquals(a, b, desc) {
     console.log(`${desc} ... FAIL: ${a} != ${b}`);
   }
 }
+
+
+
+// function containsCycle(firstNode) {
+//   try {
+//     let slowRunner = firstNode;
+//     let fastRunner = firstNode.next;
+// 
+//     while (slowRunner) {
+//       if (slowRunner === fastRunner) {
+//         return true;
+//       } else {
+//         slowRunner = slowRunner.next; 
+//         fastRunner = fastRunner.next.next;
+//       }
+//     }
+//   }
+//   catch(e) {
+//     return false;
+//   }
+// }
+
+
+
+// This is the way to do it without throwing an error
+// function containsCycle(firstNode) {
+//   // Start both runners at the beginning
+//   let slowRunner = firstNode;
+//   let fastRunner = firstNode;
+// 
+//   // Until we hit the end of the list
+//   while (fastRunner && fastRunner.next) {
+//     slowRunner = slowRunner.next;
+//     fastRunner = fastRunner.next.next;
+// 
+//     // Case: fastRunner is about to "lap" slowRunner
+//     if (fastRunner === slowRunner) {
+//       return true;
+//     }
+//   }
+// 
+//   // Case: fastRunner hit the end of the list
+//   return false;
+// }
