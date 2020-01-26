@@ -1,34 +1,35 @@
 
-function findSecondLargest(root) {
-  if (!root || (!root.left && !root.right)) throw new Error('Nah')
-  var node = root;
-  var ans = node.val;
-  var rightQ = [];
-  var leftQ = [];
+function findSecondLargest(node) {
+  let ans; 
+  if (node === undefined || !node.right && !node.left) throw new Error();
 
-  if (node.right) {
-    rightQ.push(node.right);
-  } else if (node.left) {
-    leftQ.push(node.left);
+  while (node.right) {
+    ans = node;
+    node = node.right;
+  }
+  
+  if (node.left) {
+    node = node.left;
+    ans = node;
   }
 
-  while (rightQ.length > 0) {
-    node = rightQ.shift();
-    if (node.right) {
-      ans = node.val;
-      rightQ.push(node.right);
-    } else if (node.left) {
-      leftQ.push(node.left);
-    }
+  while (node.right) {
+    node = node.right;
+    ans = node;
   }
 
-  while (leftQ.length > 0) {
-    node = leftQ.shift();
-    ans = node.val;
-    if (node.right) leftQ.push(node.right);
-  }
-  return ans;
+  return ans.val;
 }
+
+
+
+
+
+
+
+
+
+
 
 
 // Tests
@@ -128,3 +129,39 @@ function assertThrowsError(func, desc) {
     console.log(`${desc} ... PASS`);
   }
 }
+
+
+
+
+// function findSecondLargest(root) {
+//   if (!root || (!root.left && !root.right)) throw new Error('Nah')
+//   var node = root;
+//   var ans = node.val;
+//   var rightQ = [];
+//   var leftQ = [];
+// 
+//   if (node.right) {
+//     rightQ.push(node.right);
+//   }
+// 
+//   if (node.left) {
+//     leftQ.push(node.left);
+//   }
+// 
+//   while (rightQ.length > 0) {
+//     node = rightQ.shift();
+//     if (node.right) {
+//       ans = node.val;
+//       rightQ.push(node.right);
+//     } else if (node.left) {
+//       leftQ.push(node.left);
+//     }
+//   }
+// 
+//   while (leftQ.length > 0) {
+//     node = leftQ.shift();
+//     ans = node.val;
+//     if (node.right) leftQ.push(node.right);
+//   }
+//   return ans;
+// }

@@ -6,7 +6,12 @@ class LinkedListNode {
 }
 
 function deleteNode(nodeToDelete) {
-
+  if (nodeToDelete.next === null) {
+    throw new Error();
+  } else {
+    nodeToDelete.value = nodeToDelete.next.value;
+    nodeToDelete.next = nodeToDelete.next.next;
+  }
 }
 
 
