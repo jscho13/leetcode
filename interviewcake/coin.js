@@ -1,22 +1,37 @@
-function changePossibilities(amountLeft, denominations) {
-  let ans = [];
-  while(denominations.length > 0) {
-    let val = denominations[0];
-    ans[val] = ans[val]+1 || 1;
 
-    while (val < amountLeft) {
-      for (let i=0; i<denominations.length; i++) {
-        let sum = val + denominations[i];
-        ans[sum] = (ans[sum] || 0) + ans[val];
-      }
-      val = val+denominations[0];
+// BT
+// O(n(n*k))
+// S(n)
+function changePossibilities(t, nums) {
+  // Calculate the number of ways to make change
+  let ans = 0;
+  let res = [];
+
+  const bt = (s) => {
+    let sum = res.reduce((acc, val) => { return acc+val }, 0);
+    if (sum === t) {
+      ans++;
+      return;
     }
 
-    denominations.shift();
+    if (sum > t) {
+      return;
+    }
+
+    for (let i=s; i<nums.length; i++) {
+      res.push(nums[i]);
+      bt(i);
+      res.pop();
+    }
   }
 
-  return ans[amountLeft];
+  bt(0);
+  return ans;
 }
+
+
+
+
 
 
 
@@ -63,3 +78,6 @@ function assertEqual(a, b, desc) {
     console.log(`${desc} ... FAIL: ${a} != ${b}`)
   }
 }
+
+
+
