@@ -1,49 +1,33 @@
-class Queue {
-  constructor() {
-    this.queue = [];
-    this.size = 0;
-  }
 
-  enqueue(item) {
-    this.queue.unshift(item);
-    this.size += 1;
-  }
+// O(n+m)
+// S(n)
 
-  dequeue() {
-    this.size -= 1;
-    return this.queue.pop();
-  }
-}
+function getPath(graph, s, e) {
+  if (!graph[e]) throw new Error;
 
-// O(n+m), S(n)
-
-// REFACTOR THIS ANSWER AT END
-function getPath(graph, startNode, endNode) {
-  // Find the shortest route in the network between the two users
-  let visited = new Set();
-  let queue = new Queue();
-  queue.enqueue({ chain: startNode, children: graph[startNode] });
-  while (queue.size > 0) {
-    let item = queue.dequeue();
-    let node = item.chain.slice(-1);
-    if (node === endNode) return item.chain.split('');
-    for (var i=0; i<item.children.length; i++) {
-      let child = item.children[i];
-      if (child != endNode && !visited.has(child)) {
-        visited.add(child);
-        queue.enqueue({ chain: item.chain+child, children: graph[child] });
-      }
-
-      if (child === endNode) {
-        return (item.chain+child).split('');
+  let map = new Map();
+  let q = [s];
+  while (q.length) {
+    let n = q.pop();
+    let options = graph[n]; 
+    for (let i=0; i<options.length; i++) {
+      if (map.get(options[i]) === undefined) {
+        map.set(options[i], n);
+        if (options[i] === e) break;
+        q.push(options[i]);
       }
     }
   }
 
-  if (!graph[endNode]) {
-    throw new Error;
+  let ans = [];
+  let rebuild = e;
+  while (ans.includes(s) === false) {
+    ans.unshift(rebuild);
+    rebuild = map.get(rebuild);
+    if (ans.includes(rebuild)) break;
   }
-  return null;
+
+  return ans.includes(s) ? ans : null;
 }
 
 
@@ -132,28 +116,33 @@ function assertThrowsError(func, desc) {
   }
 }
 
-// ANSWER
+
+// Original answer
+// O(n+m), S(n)
+
 // function getPath(graph, startNode, endNode) {
-//   if (!graph[endNode]) {
-//     throw new Error;
-//   }
-// 
+//   let visited = new Set();
 //   let queue = new Queue();
 //   queue.enqueue({ chain: startNode, children: graph[startNode] });
-// 
-//   let visited = new Set([startNode]);
-// 
 //   while (queue.size > 0) {
 //     let item = queue.dequeue();
 //     let node = item.chain.slice(-1);
 //     if (node === endNode) return item.chain.split('');
 //     for (var i=0; i<item.children.length; i++) {
 //       let child = item.children[i];
-//       if (!visited.has(child)) {
+//       if (child != endNode && !visited.has(child)) {
 //         visited.add(child);
 //         queue.enqueue({ chain: item.chain+child, children: graph[child] });
 //       }
+// 
+//       if (child === endNode) {
+//         return (item.chain+child).split('');
+//       }
 //     }
+//   }
+// 
+//   if (!graph[endNode]) {
+//     throw new Error;
 //   }
 //   return null;
 // }
