@@ -21,13 +21,13 @@ function getPath(graph, s, e) {
 
   let ans = [];
   let rebuild = e;
-  while (ans.includes(s) === false) {
+  while (ans[0] !== s) {
     ans.unshift(rebuild);
     rebuild = map.get(rebuild);
     if (ans.includes(rebuild)) break;
   }
 
-  return ans.includes(s) ? ans : null;
+  return ans[0] === s ? ans : null;
 }
 
 
