@@ -1,46 +1,59 @@
-var expressiveWords = function(S, words) {
-    var lenS = S.length;
-    if(lenS === 0) {// should not be empty
-        return 0;
-    }
-    
-    var n = words.length;
-    var res = 0;
-    for(let i = 0; i < n; i++) {
-        var lenW = words[i].length;
-        if(lenW === 0 || lenW >= lenS) {// words[i] should not be empty or longer than S
-            return 0;
-        }
-        var j, k;
-        [j, k] = [0, 0];
-        var streched = false;// if group word in words[i] can strech and form into group word in S
-        console.log(words[i]);
-        for(; j < lenS && k < lenW; j++, k++) {
-            var startS, startW;
-            [startS, startW] = [j, k];
-            if(S[j] === words[i][k]) {
-                while(j < lenS - 1 && S[j] === S[j+1]) j++;
-                while(k < lenW - 1 && words[i][k] === words[i][k+1]) k++;
-                console.log('j:'+j);
-                console.log('k:'+k);
-                if(j - startS >= 2) {//when one character repeats twice or more, viewed as streched.
-                    streched = true;
-                }
-                else if(j - startS !== k - startW) {//if not streched, should be identical
-                    streched = false;
-                    break;
-                }
-            }
-            else {
-                streched = false;
-                break;
-            }
-        }
-        if(streched) {
-            res++;
-        }
-    }
-    return res;
-};
+// Backtrack
+// var subsets = function(nums) {
+//     let result = [[]];
+//     
+//     function backtrack(first, current) {
+//       // we iterate over the indexes i from 'first' to the length
+//       //of the entire sequence 'nums'
+//       for (let i = first; i < nums.length; i++) {
+//           current.push(nums[i]);
+// 
+//           // use distructure operator to clone 'current' value and save to 'result'
+//           result.push([...current]);
+//           console.log(result);
+// 
+//           // generate all other subsets for the current subset.
+//           // increasing the position by one to avoid duplicates in 'result'
+//           backtrack(i + 1, current);
+// 
+//           // BACKTRACK.
+//           current.pop();
+//       }
+//       console.log('finished');
+//     }
+//     
+//     backtrack(0, []);
+//     return result
+// };
+//
+// console.log(subsets([1,2,3]));
 
-console.log(expressiveWords("helllllooo", ["hello", "hi", "helo"]));
+
+// Binary search
+// var doSearch = function(array, targetValue) {
+// 	var min = 0;
+// 	var max = array.length - 1;
+//   while (min <= max) {
+//     var mid = Math.floor((min+max)/2);
+//     console.log(mid);
+//     if (array[mid] > targetValue) {
+//       max = mid-1;
+//     } else if (array[mid] < targetValue) {
+//       min = mid+1;
+//     } else {
+//       return mid;
+//     }
+//   }
+// 
+// 	return -1;
+// };
+// 
+// var primes = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 
+// 		41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97];
+// var result = doSearch(primes, 42);
+// console.log("Found prime at index " + result);
+//
+// Mistakes:
+// while needs to be <=... if there's no equal it won't be able to find 1 item arrays e.g. [2]
+// max/min needs to be +1/-1. Otherwise it'll get closest element and then not move 
+
