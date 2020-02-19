@@ -1,14 +1,13 @@
-const findUniqueDeliveryId = (deliveryIds) => {
+
+function findUniqueDeliveryId(deliveryIds) {
   // Find the one unique ID in the array
-  let start = 0;
+  let binaryInt=0;
   for (let i=0; i<deliveryIds.length; i++) {
-    start = start ^ deliveryIds[i];
+    binaryInt = deliveryIds[i] ^ binaryInt;
   }
-  
 
-  return start;
+  return binaryInt;
 }
-
 
 
 

@@ -6,26 +6,28 @@ class GraphNode {
   }
 }
 
-// this strategy assigns a color, and then assigns the neighbors color
-// O(N*D)
 function colorGraph(graph, colors) {
-  if (graph[0].neighbors.has(graph[0])) throw 'Circular reference';
-  
-  for(let i=0; i<graph.length; i++) {
-    let used = [];
-    giveColor(graph[i]);
-    graph[i].neighbors.forEach(n => { if (!n.color) giveColor(n) });
+  for (let i=0; i<graph.length; i++) {
+    let usedColors = [];
+    let node = graph[i];
+    node.neighbors.forEach(nNode => {
+      if (nNode === node) throw new Error();
+      usedColors.push(nNode.color);
+    });
 
-    function giveColor(n) {
-      n.neighbors.forEach((x) => { if (x.color) used.push(x.color) });
-      let unused = colors.filter(color => !used.includes(color) );
-      let color = unused[0];
-      used.push(color);
-      n.color = color;
+    for (let x=0; x<colors.length; x++) {
+      if (!usedColors.includes(colors[x])) {
+        node.color = colors[x];
+        break;
+      }
     }
   }
-  return graph;
 }
+
+
+
+
+
 
 
 
