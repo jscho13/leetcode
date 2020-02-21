@@ -1,3 +1,10 @@
+
+// O(N+M)
+// might not look like N+M cause of inner and outer loops
+// the trick is to at each step and think in terms of total number of edges
+// S(D)
+// D is the total number of colors. that's all we're saving
+
 class GraphNode {
   constructor(label) {
     this.label = label;

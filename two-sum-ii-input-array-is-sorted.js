@@ -25,6 +25,4 @@ var twoSum = function(numbers, target) {
 // Time-complexity: O(n)
 // Attempt: 1
 
-// There are O(nlogn) solutions out there that use
-// binary search to find the right pointers
-// instead of iterating down by 1 each time
+// This isn't optimal. There's better...
