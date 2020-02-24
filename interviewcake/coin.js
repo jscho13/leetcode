@@ -1,9 +1,24 @@
 
+// DP
+// const changePossibilities = (amount, coins) => {
+//   let ans = new Array(amount+1).fill(0);
+//   ans[0] = 1;
+//   
+//   for (let i=0; i<coins.length; i++) {
+//     let coin = coins[i];
+//     for (let j=coin; j<amount+1; j++) {
+//       ans[j] = ans[j-coin]+ans[j];
+//     }
+//   }
+// 
+//   return ans[amount];
+// }
+
+
 // BT
 // O(n(n*k))
 // S(n)
 function changePossibilities(t, nums) {
-  // Calculate the number of ways to make change
   let ans = 0;
   let res = [];
 
