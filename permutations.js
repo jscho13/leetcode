@@ -25,6 +25,7 @@ const permute = (nums) => {
   bt();
   return ans;
 };
+console.log(permute([1,2,3]));
 
 
 // var permute = function(nums) {
