@@ -1,11 +1,15 @@
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
 
-var maxSubArray = function(nums) {
-  var curr = nums[0];
-  var max = nums[0];
-  for (var i=1; i<nums.length; i++) {
-    curr = Math.max(curr+nums[i], nums[i]);
-    max = Math.max(max, curr);
+const maxSubArray = (nums) => {
+  let sum=0;
+  let ans=Number.NEGATIVE_INFINITY;
+  for (let i=0; i<nums.length; i++) {
+    sum += nums[i];
+    if (nums[i] > sum) sum = nums[i];
+    ans = Math.max(sum, ans);
   }
-  return max;
-}
-
+  return ans;
+};

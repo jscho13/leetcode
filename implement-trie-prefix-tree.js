@@ -1,38 +1,34 @@
-var Trie = function() {
-  this.trie = {};
-  this.traverse = function(s) {
-    var hash = this.trie;
-    for (var c=0; c<s.length; c++) {
-      var ch = s[c];
-      if (!hash[ch]) return false;
-      hash = hash[ch];
-    }
-    return hash;
+class Trie {
+  constructor () {
+    this.dict = {};
   }
-};
-
-Trie.prototype.insert = function(word) {
-  var trie = this.trie;
-  for (var c=0; c<word.length; c++) {
-    var ch = word[c];
-    if (!trie[ch]) {
-      trie[ch] = {};
-      trie = trie[ch];
-    } else {
-      trie = trie[ch];
+  
+  insert(word) {
+    let dict = this.dict;
+    for (let i=0; i<word.length; i++) {
+      let l = word[i];
+      if (!dict[l]) dict[l] = {};
+      dict = dict[l];
     }
-    if (c === word.length-1) trie[word] = true;
+    dict['word'] = true;
   }
-};
+  
+  traverse(word) {
+    let dict = this.dict;
+    for (let i=0; i<word.length; i++) {
+      let l = word[i];
+      if (dict[l] === undefined) return false;
+      dict = dict[l];
+    }
+    return dict;    
+  }
 
-Trie.prototype.search = function(word) {
-  var node = this.traverse(word);
-  if (node[word] === true) return true;
-  return false;
-};
+  search(word) {
+    word = this.traverse(word);
+    return !!word['word'];
+  }
 
-Trie.prototype.startsWith = function(prefix) {
-  var node = this.traverse(prefix);
-  if (!node) return false;
-  return true;
-};
+  startsWith(word) {
+    return !!this.traverse(word);
+  }
+}
