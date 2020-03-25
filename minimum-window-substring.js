@@ -11,38 +11,79 @@
 // If there is no such window in S that covers all characters in T, return the empty string "".
 // If there is such window, you are guaranteed that there will always be only one unique minimum window in S.
 
-var minWindow = function(s, t) {
-  var [r,l] = [0,0]; 
-  var dict = {};
-  var min = Infinity;
-  var ans = "";
+// YES ANSWER IS DOWN THERE. DON'T LOOK
+const minWindow = (s, t) => {
+}
 
-  for (var i=0; i<t.length; i++) {
-    var c=t[i];
-    dict[c] = dict[c] || 0;
-    dict[c]++;
-  }
 
-  var counter = Object.keys(dict).length;
-  while (r<s.length) {
-    var c=s[r];
-    if (dict[c] != undefined) dict[c]--;
-    if (dict[c] === 0) counter--;
 
-    while (counter === 0) {
-      var lC = s[l];
-      if (dict[lC] != undefined) dict[lC]++;
-      if (dict[lC] > 0) counter++;
-      if (min > r-l+1) {
-        ans = s.substring(l, r+1);
-        min = ans.length;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * @param {string} s
+ * @param {string} t
+ * @return {string}
+ */
+// O(n*m+m) --> the object.values is suboptimal. it can be a count.
+// when the key hits 0 drop the count by 1. dont need to loop through all values every time
+// S(m)
+const minWindow = (s, t) => {
+  let dict = {};
+  for (let i=0; i<t.length; i++) dict[t[i]] = dict[t[i]] ? dict[t[i]]+1 : 1;
+
+  let [l, r, min] = [0, 0, Number.POSITIVE_INFINITY];
+  let ans = "";
+  
+  while (l<=r && r<s.length) {
+    if (dict[s[r]] !== undefined) { dict[s[r]]-- };
+    let word = Object.values(dict).every((x) => { return x<1 });
+    
+    while (word) {
+      if (r-l<min) {
+      console.log(min);
+        min = r-l;
+        ans = s.slice(l, r+1);
+      }
+      if (dict[s[l]] !== undefined) {
+        let count = dict[s[l]]++;
+        word = (count === 0) ? false : true;
       }
       l++;
     }
+
     r++;
   }
   
   return ans;
-}
-
-console.log(minWindow('a', 'aa'));
+};
