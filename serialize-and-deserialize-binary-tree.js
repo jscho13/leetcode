@@ -1,3 +1,67 @@
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+
+// O(n)
+// S(n)
+const serialize = (root) => {
+  if (root === null) return '';
+  
+  let data = [];
+  let q = [root];
+  while (q.length) {
+    let n = q.shift();
+    if (n != null) {
+      data.push(n.val);
+      q.push(n.left);
+      q.push(n.right);
+    } else {
+      data.push('null');
+    }
+  }
+  return data.join(',');
+};
+
+const deserialize = (data) => {
+  if (data === '') return null;
+  
+  data = data.split(',');
+  let root = new TreeNode(data.shift());
+  let q = [root];
+
+  while (q.length) {
+    let n = q.shift();
+    let val = data.shift();
+    if (val !== 'null') {
+      let left = new TreeNode(parseInt(val));
+      n.left = left;
+      q.push(left);
+    }
+
+    val = data.shift();
+    if (val !== 'null') {
+      let right = new TreeNode(parseInt(val));
+      n.right = right;
+      q.push(right);
+    }
+  }
+  return root;
+};
+
+
+
+
+
+
+
+
+
+
+
 
 var serialize = function(root) {
   var list = [];
