@@ -2,20 +2,18 @@
  * @param {number} n
  * @return {number}
  */
-
-
-// Dynamic programming
+// O(n*k)
+// S(n)
 const climbStairs = (n) => {
-  let steps = [1,2];
   let ary = new Array(n+1).fill(0);
-  ary[0] = 1;
-  for (let i=1; i<=n; i++) {
-    for (let j=0; j<steps.length; j++) {
-      let step = steps[j];
-      if (step <= i) ary[i] = ary[i-step]+ary[i];
+  ary[0]=1;
+  
+  for (let j=1; j<=n; j++) {
+    for (let s=1; s<=2; s++) {
+      ary[j] = (ary[j-s] || 0)+ary[j];
     }
   }
-
+  
   return ary[n];
 }
 
