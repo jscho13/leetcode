@@ -1,48 +1,43 @@
-// Attempts: 2
-
-var spiralOrder = function(matrix) {
-  if (matrix.length === 0) return [];
-  var d = 'e';
-  var [y,x] = [0,0]
-  // n e s w
-  var bounds = [-1, matrix[0].length, matrix.length, -1];
-  var ans = [];
-  while (y > bounds[0] && x < bounds[1] && y < bounds[2] && x > bounds[3]) {
-    ans.push(matrix[y][x]);
-    if (d === 'e') {
+/**
+ * @param {number[][]} matrix
+ * @return {number[]}
+ */
+// O(n)
+// S(n)
+const spiralOrder = (matrix) => {
+  if (matrix.length===0) return [];
+  let [l,b,t,r] = [0,0,matrix.length-1,matrix[0].length-1]
+  let [y,x] = [0,-1];
+  let str = [];
+  while (y>b || y<t || x>l || x<r) {
+    while (x<r) {
       x++;
-      if (x+1 === bounds[1]) {
-        d = 's';
-        x--;
-        y++;
-        bounds[0]++;
-      }
-    } else if (d === 's') {
-      y++;
-      if (y === bounds[2]) {
-        d = 'w';
-        y--;
-        x--;
-        bounds[1]--;
-      }
-    } else if (d === 'w') {
-      x--;
-      if (x === bounds[3]) {
-        d = 'n';
-        x++;
-        y--;
-        bounds[2]--;
-      }
-    } else {
-      y--;
-      if (y === bounds[0]) {
-        d = 'e';
-        y++;
-        x++;
-        bounds[3]++;
-      }
+      if (matrix[y][x] != null) str.push(matrix[y][x]);
+      matrix[y][x]=null;
     }
+    b++;
+    
+    while (y<t) {
+      y++;
+      if (matrix[y][x] != null) str.push(matrix[y][x]);
+      matrix[y][x]=null;
+    }
+    r--;
+    
+    while (x>l) {
+      x--;
+      if (matrix[y][x] != null) str.push(matrix[y][x]);
+      matrix[y][x]=null;
+    }
+    t--;
+    
+    while (y>b) {
+      y--;
+      if (matrix[y][x] != null) str.push(matrix[y][x]);
+      matrix[y][x]=null;
+    }
+    l++;
   }
-
-  return ans;
+  
+  return str;
 };
