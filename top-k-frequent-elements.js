@@ -3,21 +3,47 @@
  * @param {number} k
  * @return {number[]}
  */
-
+// Newer solution is shorter... but also not as good
 // O(n)
 // S(n)
+const topKFrequent = (nums, k) => {
+  let dict = {};
+  for (let i=0; i<nums.length; i++) {
+    dict[nums[i]] = dict[nums[i]]+1 || 1;
+  }
+  
+  let ans = [];
+  while (k>0) {
+    let max=0;
+    let num;
+    for (let key in dict) {
+      if (dict[key] > max) {
+        max = dict[key];
+        num = key;
+      }
+    }
+    ans.push(num);
+    delete dict[num];
+    k--;
+  }
+  return ans;
+};
 
+
+
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number[]}
+ */
+// O(n)
+// S(n)
 const topKFrequent = (nums, k) => {
   let set = {};
 
-	for (let i=0; i<nums.length; i++) {
-    let num = nums[i];
-    if (set[num] !== undefined) {
-      set[num]++;
-    } else {
-      set[num] = 1;
-    }
-	}
+  for (let i=0; i<nums.length; i++) {
+    set[nums[i]] = set[nums[i]]+1 || 1;
+  }
 
   let counts = [];
   for (let key in set) {
@@ -43,14 +69,3 @@ const topKFrequent = (nums, k) => {
 
   return ans;
 };
-
-
-// Example 1:
-// 
-// Input: nums = [1,1,1,2,2,3], k = 2
-// Output: [1,2]
-// Example 2:
-// 
-// Input: nums = [1], k = 1
-// Output: [1]
-
