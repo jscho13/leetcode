@@ -9,32 +9,43 @@
  * @param {TreeNode} root
  * @return {number}
  */
-var maxDepth = function(root) {
-  var ans = 0;
-  if (root === null) return ans;
-  // ans = depthHelper(root, ans);
-  // ans = depthHelper2(root);
-  return ans;
+// Recursive 
+const maxDepth = (root) => {
+  const helper = (node) => {
+    if (node === null) return 0;
+    
+    let left, right;
+    if (node) {
+      left = helper(node.left);
+      right = helper(node.right);
+    }
+    return Math.max(left, right)+1;
+  }
+
+  return helper(root);
 };
 
-// Solve alone
-var depthHelper = function(node, depth) {
-  var max1 = 0;
-  var max2 = 0;
   
-  if (node.left) {
-    max1 = depthHelper(node.left, depth) + 1;
-  }
-  
-  if (node.right) {
-    max2 = depthHelper(node.right, depth) + 1;
-  }
- 
-  var max = (max1 > max2) ? max1 : max2;
-  max = (max === 0) ? 1 : max;
-  return max;
-}
 
-// Solved with online tips
-var depthHelper2 = function(node) {
-}
+// Iterative
+const maxDepth = (root) => {
+  if (root === null) return 0;
+  let q = [root];
+  let depth=0;
+  while (q.length) {
+    let level = q.length;
+    depth++;    
+
+    while (level > 0) {
+      let node=q.shift();
+      level--;
+      if (node) {
+        q.push(node.left);
+        q.push(node.right);
+      }
+    }
+  }
+  
+  return depth-1;
+};
+

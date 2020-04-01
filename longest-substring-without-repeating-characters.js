@@ -1,19 +1,22 @@
-
-var lengthOfLongestSubstring = function(s) {
-  var hash = {};
-  var l = 0;
-  var max = 0;
-  for (var r=0; r<s.length; r++) {
-    var ch = s[r];
-    hash[ch] = hash[ch] || 0;
-    hash[ch]++;
-    while (hash[ch] > 1) {
-      var lCh = s[l];
-      hash[lCh]--;
+/**
+ * @param {string} s
+ * @return {number}
+ */
+// O(n)
+// S(1)
+const lengthOfLongestSubstring = (s) => {
+  let dict = {};
+  let [l,r,ans] = [0,0,0];
+  
+  while (l<=r && r<s.length) {
+    dict[s[r]] = dict[s[r]] ? dict[s[r]]+1 : 1;
+    while (dict[s[r]] > 1) {
+      dict[s[l]]--;
       l++;
     }
-    max = Math.max(max, r-l+1);
+    r++;
+    ans = Math.max(ans, r-l);
   }
   
-  return max;
-}
+  return ans;
+};
