@@ -1,30 +1,40 @@
-function isValid(code) {
-	let q = [];
-	let map1 = {
-    '[': ']',
-    '{': '}',
-    '(': ')'
-  };
+const isValid = (s) => {
+  let q=[];
+  let dict = { '}':'{', ']':'[', ')':'(' };
+  for (let i=0; i<s.length; i++) {
+    dict[s[i]] && dict[s[i]] === q[q.length-1] ? q.pop() : q.push(s[i]);
+  }
+  
+  return q.length === 0;
+};
 
-	let map2= {
-    ']': '[',
-    '}': '{',
-    ')': '('
-	}
-
-	for (var i=0; i<code.length;i++) {
-		let ch = code[i];
-		if (map1[ch]) q.push(ch);
-
-		if (map2[ch]) {
-			let close = q.pop();
-      if (close != map2[ch] || close === undefined) return false;
-		}
-	}
-
-	if (q.length > 0) return false;
-  return true;
-}
+// function isValid(code) {
+// 	let q = [];
+// 	let map1 = {
+//     '[': ']',
+//     '{': '}',
+//     '(': ')'
+//   };
+// 
+// 	let map2= {
+//     ']': '[',
+//     '}': '{',
+//     ')': '('
+// 	}
+// 
+// 	for (var i=0; i<code.length;i++) {
+// 		let ch = code[i];
+// 		if (map1[ch]) q.push(ch);
+// 
+// 		if (map2[ch]) {
+// 			let close = q.pop();
+//       if (close != map2[ch] || close === undefined) return false;
+// 		}
+// 	}
+// 
+// 	if (q.length > 0) return false;
+//   return true;
+// }
 
 
 
