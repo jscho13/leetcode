@@ -2,6 +2,38 @@
  * @param {character[][]} grid
  * @return {number}
  */
+// O(m*n)
+// S(1)
+const numIslands = (grid) => {
+  let count = 0;
+  let dirs = [[1,0],[-1,0],[0,1],[0,-1]];
+  
+  const bfs = (y,x) => {
+    for (let d=0; d<dirs.length; d++) {
+      let dir = dirs[d];
+      let yP = y+dir[0]
+      let xP = x+dir[1];
+      if (grid[yP] && grid[yP][xP] === "1") {
+        grid[yP][xP] = "0";
+        bfs(yP, xP);
+      }
+    }
+  }
+  
+  for (let i=0; i<grid.length; i++) {
+    for (let j=0; j<grid[i].length; j++) {
+      if (grid[i][j] === "1") {
+        count++;
+        bfs(i,j);
+      }
+    }
+  }
+  
+  return count;
+};
+
+
+// Old
 var numIslands = function(grid) {
   // north, east, south, west
   var directions = [[-1, 0], [0, 1], [1, 0], [0, -1]];

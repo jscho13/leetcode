@@ -4,54 +4,18 @@
 * @return {number}
 */
 
-// You have the answer down there. DON'T LOOK. Can you do better?
+// 2020
 const maxProfit = (prices) => {
-}
+  if (prices.length<2) return 0;
+  let [max,min]=[0,prices[0]];
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  for (let i=1; i<prices.length; i++) {
+    let diff = prices[i]-min;
+    max = Math.max(max, diff);
+    if (prices[i] < min) min=prices[i];
+  }
+  return max;
+};
 
 // 2019
 // const maxProfit = (prices) => {
