@@ -1,15 +1,26 @@
-
-var coinChange = function(coins, amount) {
-  var dp = new Array(amount+1).fill(Infinity);
-  dp[0] = 0;
-  for (var a=1; a<=amount; a++) {
-    for (var c=0; c<coins.length; c++) {
-      if (dp[a-coins[c]] !== undefined) {
-        dp[a] = Math.min(dp[a-coins[c]]+1, dp[a]);
-      }
+/**
+ * @param {number[]} coins
+ * @param {number} amount
+ * @return {number}
+ */
+// O(n*c)
+// S(n)
+const coinChange = (coins, amount) => {
+  let dp = new Array(amount+1).fill(-1);
+  dp[0]=0;
+  
+  for (let c=0; c<coins.length; c++) {
+    let coin = coins[c];
+    for (let i=0; i<dp.length; i++) {
+      if (dp[i-coin] > -1) {
+        if (dp[i] === -1) { 
+          dp[i] = dp[i-coin]+1;
+        } else {
+          dp[i] = Math.min(dp[i-coin]+1, dp[i]);
+        }
+      } 
     }
   }
-  
-  return (dp[dp.length-1] === Infinity) ? -1 : dp[dp.length-1];
-};
 
+  return dp[amount];
+};
