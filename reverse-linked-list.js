@@ -13,13 +13,11 @@
 //   return prev;
 // };
 
-// recursively
-var reverseList = function(node, prev) {
-  if (node === null && prev === undefined) return null;
+
+// recursive only
+const reverseList = (node, prev=null) => {
   if (node === null) return prev;
-  var temp = node.next;
+  let temp = node.next;
   node.next = prev;
-  prev = node;
-  node = temp;
-  return reverseList(node, prev);
-}
+  return reverseList(temp, node);
+};

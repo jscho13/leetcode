@@ -9,26 +9,26 @@
  * @param {TreeNode} root
  * @return {number[]}
  */
-var inorderTraversal = function(root) {
-  var ans = [];
-  ans = inorderTraversalHelper(root, ans);
-
-  return ans;
-};
-
-var inorderTraversalHelper = function(node, array) {
-  // if there is a left child always go down that path
-  if (node.left) {
-    array = inorderTraversalHelper(node.left, array);
+// O(n)
+// S(n)
+// Iterative traversal
+const inorderTraversal = (root) => {
+  let q=[root];
+  let ans=[];
+  let dict = new Set();
+  while (q.length) {
+    let n = q.shift();
+    if (n) {
+      if (dict.has(n)) {
+        ans.push(n.val);
+      } else {
+        q.unshift(n.right);
+        q.unshift(n);
+        q.unshift(n.left);
+        dict.add(n);
+      }
+    }
   }
   
-  // return the current (middle) node
-  array.push(node.val);
-
-  // if theres a right, go down that path after the left
-  if (node.right) {
-    array = inorderTraversalHelper(node.right, array);
-  }
-
-  return array;
-}
+  return ans;
+};

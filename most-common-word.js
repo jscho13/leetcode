@@ -11,7 +11,6 @@ const mostCommonWord = (paragraph, banned) => {
 	paragraph = paragraph.replace(/[^a-zA-Z]/g,'');     
 	paragraph.toLowerCase();
   paragraph = paragraph.split(' ');	
-  console.log(paragraph);
 
   let banDict = {};
   for (let b=0; b<banned.length; b++) {
