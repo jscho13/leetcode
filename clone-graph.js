@@ -29,3 +29,27 @@ const cloneGraph = (node) => {
   
   return ary[node.val];
 };
+
+// Attempt 2
+// It's basically the same, but in DFS
+const cloneGraph = (root) => {
+    if (!root) return null;
+    let list = [];
+    
+    const dfs = n => {
+        if (!list[n.val]) {
+            const node = new Node(n.val);
+            list[n.val] = node;
+            for (let i=0; i<n.neighbors.length; i++) {
+                let neighbor = n.neighbors[i];
+                if (!list[neighbor.val]) {
+                    dfs(neighbor);
+                }
+                node.neighbors.push(list[neighbor.val]);
+            }
+        }
+    }
+
+    dfs(root);
+    return list[root.val];
+};
