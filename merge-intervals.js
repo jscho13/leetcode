@@ -2,6 +2,31 @@
  * @param {number[][]} intervals
  * @return {number[][]}
  */
+// Attempt 3. same as last time
+const merge = (intervals) => {
+    let sort = intervals.sort((a,b) => {
+        if (a[0]===b[0]) return a[1]-b[1];
+        return a[0]-b[0];
+    });
+    
+    let ans = [];
+    let room = sort.shift();
+    
+    while (sort.length) {
+        let compare = sort.shift();
+        if (compare[0] <= room[1]) {
+            room[1] = Math.max(compare[1], room[1]);
+        } else {
+            ans.push(room.slice());
+            room = compare;
+        }        
+    }
+    
+    ans.push(room.slice());    
+    return ans;
+};
+
+
 // O(nlogn + n)
 // S(n)
 // Nice job significant improvement here
@@ -26,18 +51,7 @@ const merge = (intervals) => {
 
 
 
-
-/**
- * Definition for an interval.
- * function Interval(start, end) {
- *     this.start = start;
- *     this.end = end;
- * }
- */
-/**
- * @param {Interval[]} intervals
- * @return {Interval[]}
- */
+// Attempt 1:
 // Time-complexity: O(n^2)
 // Space-complexity: O(n)
 var merge = function(intervals) {
