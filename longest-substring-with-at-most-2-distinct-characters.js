@@ -3,7 +3,7 @@
  * @return {number}
  */
 // O(n)
-// S(n)
+// S(1)
 const lengthOfLongestSubstringTwoDistinct = (s) => {
     let q={};
     let l=0;
