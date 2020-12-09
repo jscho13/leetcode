@@ -1,3 +1,33 @@
+// Attempt 2
+// O(n)
+// S(n)
+class BSTIterator {
+    constructor(root) {
+        this.ary = [];
+
+        const dfs = node => {
+            if (!node) return;
+            dfs(node.left);
+            this.ary.push(node.val);
+            dfs(node.right);
+        }    
+
+        dfs(root);
+    }
+    
+    next = () => {
+        return this.ary.shift();
+    };
+
+    hasNext = () => {
+        return this.ary[0] !== undefined;
+    };
+};
+
+
+
+
+// Attempt 1
 /**
  * Definition for a binary tree node.
  * function TreeNode(val) {
