@@ -11,58 +11,24 @@
  * @return {ListNode}
  */
 
-// Attempts: 3
-// this one was harder than it should have been.
-// O(n)
-// S(1)
-
+// Attempts: 4
+// O(n+m)
+// S(n+m)
 const mergeTwoLists = (l1, l2) => {
-  if (l1 === null) return l2;
-  if (l2 === null ) return l1;
+    let head = new ListNode(0);
+    let node = head;
+    while (l1 && l2) {
+        if (l1.val < l2.val) {
+            node.next = l1;
+            l1 = l1.next;
+        } else {
+            node.next = l2;
+            l2 = l2.next;
+        }
+        node = node.next;
+    }
     
-  if (l1.val > l2.val) {
-    let tmp = l1;
-    l1 = l2;
-    l2 = tmp;
-  }
-  
-  let root = l1;
-  let n = l1;
-  let s = l2;
-  while (n && s) {
-    if (n.next && n.next.val > s.val) {
-      let tmp = n.next;
-      n.next = s;
-      s = tmp;
-    } else if (n.next === null) {
-      n.next = s;
-      break;
-    }
-    n = n.next;
-  }  
-  return root;
-};
-
-
-// This one uses extra space but is far easier
-// O(n)
-// S(1)
-const mergeTwoLists = (l1, l2) => {
-  let head = new ListNode(-1);
-  let node = head;
-  
-  while (l1 && l2) {
-    if (l1.val <= l2.val) {
-      node.next = new ListNode(l1.val);
-      l1 = l1.next;
-    } else {
-      node.next = new ListNode(l2.val);
-      l2 = l2.next;      
-    }
-    node = node.next;
-  }
-  
-  if (l1) node.next = l1;
-  if (l2) node.next = l2;
-  return head.next;
+    if (l1) node.next = l1;
+    if (l2) node.next = l2;
+    return head.next;
 };
