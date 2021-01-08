@@ -20,3 +20,23 @@ const lengthOfLongestSubstring = (s) => {
   
   return ans;
 };
+
+
+// Eh I think the first one is better
+// The obj line here is cleaner though
+const lengthOfLongestSubstring = (s) => {
+    let [l,r]=[0,0];
+    let length = 0;
+    let obj = {};
+    while (r<=s.length) {
+        obj[s[r]] = obj[s[r]]+1 || 1;
+        length = Math.max(length, r-l);
+        while (obj[s[r]] > 1) {
+            obj[s[l]]--;
+            l++;
+        }
+        r++;
+    }
+    
+    return length;
+};
