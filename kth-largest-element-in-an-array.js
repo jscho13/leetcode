@@ -4,6 +4,7 @@
  * @return {number}
  */
  
+// This is easy with max heap.
 // Supposedly O(n) and O(n^2) worst case
 const findKthLargest = (nums, k) => {
   const quickSort = (l, r) => {
