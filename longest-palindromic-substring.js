@@ -1,5 +1,31 @@
-
-// Yes the answer is down there. Don't look.
+/**
+ * @param {string} s
+ * @return {string}
+ */
+ // Attempt 5??
+// O(n^3)
+// S(n)
+const longestPalindrome = (s) => {
+    if (s.length === 1) return s;
+    let ans = '';
+    for (let i=1; i<s.length; i++) {
+        let diff = 0;
+        while (s[i-diff] === s[i+diff] && i-diff>=0) {
+            let newMax = s.slice(i-diff, i+diff+1);
+            if (ans.length < newMax.length) ans = newMax;
+            diff++;
+        }
+        
+        diff = 0;
+        while (s[i-1-diff] === s[i+diff] && i-1-diff>=0) {
+            let newMax = s.slice(i-1-diff, i+diff+1);
+            if (ans.length < newMax.length) ans = newMax;
+            diff++;
+        }
+    }
+    
+    return ans;
+};
 
 /**
  * @param {string} s
