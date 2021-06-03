@@ -3,6 +3,59 @@
  * @param {string[]} words
  * @return {string[]}
  */
+
+// O((n*m)*(w*l))
+// S(n*m + w)
+const findWords = (board, words) => {
+  // E, W, N, S
+  let dirs = [[0,1],[0,-1],[1,0],[-1,0]];
+  let foundWords = [];
+  
+  const bt = (word, y, x, ch) => {
+    if (board[y] && board[y][x] && board[y][x] === word[ch-1]) {
+      if (ch === word.length) {
+        foundWords.push(word);
+        return;
+      }
+
+      for (let d=0; d<dirs.length; d++) {
+        let temp = board[y][x];
+        board[y][x] = null;
+        bt(word, y+dirs[d][0], x+dirs[d][1], ch+1);
+        board[y][x] = temp;
+      }
+    }
+  }
+  
+  for (let i=0; i<board.length; i++) {
+    for (let j=0; j<board[i].length; j++) {
+      for (let w=0; w<words.length; w++) {
+        bt(words[w], i, j, 1);
+      }
+    }
+  }
+  
+  return [...new Set(foundWords)]; ;
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * @param {character[][]} board
+ * @param {string[]} words
+ * @return {string[]}
+ */
 var findWords = function(board, words) {
   var ans = [];
   // iterate through words

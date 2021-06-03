@@ -9,35 +9,22 @@
  * @param {TreeNode} root
  * @return {boolean}
  */
-function isValidBST(root) {
-  if (root === null) return true;
-  var q = [root];
+// O(n)
+// S(logn) -> this is just S(n)
+const isValidBST = (root) => {
+  const dfs = (node, max, min) => {
+    if (node === null) return true;
+    if (node.val >= max || node.val <= min) return false;
 
-  while (q.length != 0) {
-    n = q.shift();
-    if (n.left) {
-      if (Math.max(...check_children(n.left)) >= n.val) return false;
-      q.push(n.left);
-    }
-
-    if (n.right) {
-      if (Math.min(...check_children(n.right)) <= n.val) return false;
-      q.push(n.right);
-    }
+    let left = dfs(node.left, Math.min(max, node.val), min);
+    let right = dfs(node.right, max, Math.max(min, node.val));
+    return left && right;
   }
-
-  return true;
+  
+  return dfs(root, Number.POSITIVE_INFINITY, Number.NEGATIVE_INFINITY);
 };
 
-function check_children(n) {
-  var list = [n.val];
-  if (n.left) {
-    list = list.concat(check_children(n.left));
-  }
 
-  if (n.right) {
-    list = list.concat(check_children(n.right));
-  }
-
-  return list;
-}
+// 1 - postorder traversal
+// 2 - dfs with limits - recursive -> mastered
+// 3 - dfs with limits - iterative

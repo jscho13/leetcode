@@ -4,43 +4,31 @@
  * @return {string[]}
  */
 const fullJustify = (words, maxWidth) => {
-  let ary=[];
-  let line=[];
+  let ary=[[]];
   let len=0;
 
   // create lines with words
   for (let i=0; i<words.length; i++) {
     let word=words[i];
     if (len+word.length > maxWidth) {
-      ary.push(line.slice(0));
-      line=[word, ' '];
-      len=word.length+1;
-    } else {
-      line.push(word);
-      line.push(' ');
-      len+=word.length+1;
+      ary.push([]);
+      len=0;
     }
+    ary[ary.length-1].push(word);
+    ary[ary.length-1].push(' ');
+    len+=word.length+1;
   }
-  if (line) ary.push(line.slice(0));
 
   // add padding
-  for (let rowIdx=0; rowIdx<ary.length-1; rowIdx++) {
-    let row = ary[rowIdx]
-    if (row.length < 3) {
+  for (let rowIdx=0; rowIdx<ary.length; rowIdx++) {
+    let row = ary[rowIdx];
+    row.pop();
 
-      let str=row.join('');
-      let padding = maxWidth-str.length;
-      if (padding<0) row.pop();
-      while (padding>0) {
-        row[1] += ' ';
-        padding--;
-      }
-    } else {
-      row.pop();
+    if (row.length > 1 && rowIdx != ary.length-1) {
       let str=row.join('');
       let padding = maxWidth-str.length;
       let idx=1;
-      while (padding>0) {
+      while (padding) {
         row[idx] += ' ';
         padding--;
         idx = (idx+2)%(row.length-1);
@@ -48,16 +36,14 @@ const fullJustify = (words, maxWidth) => {
     }
   }
 
-  // last row is special
-  let last=ary[ary.length-1];
-  let str=last.join('');
-  let padding = maxWidth-str.length;
-  if (padding<0) last.pop();
-  while (padding>0) {
-    last[last.length-1] += ' ';
-    padding--;
+  // add end padding if necessary
+  for (let rowIdx=0; rowIdx<ary.length; rowIdx++) {
+    let row = ary[rowIdx];
+    let str=row.join('');
+    let padding = maxWidth-str.length;
+    let blanks = ' '.repeat(padding);
+    if (row.length === 1 || rowIdx === ary.length-1) row[row.length-1]+=blanks;
   }
-
   
   // join arrays and return
   ary = ary.map(row => { return row.join(''); });

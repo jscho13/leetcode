@@ -1,3 +1,28 @@
+
+/**
+ * @param {string} s
+ * @param {string[]} wordDict
+ * @return {boolean}
+ */
+// O(n*n*m)
+// S(m)
+// Brute force
+const wordBreak = (s, wordDict) => {
+  let ary = new Array(s.length+1).fill(0);
+  ary[0] = 1;
+  
+  for (let i=0; i<s.length; i++) {
+    for (let j=i+1; j<s.length+1; j++) {
+      let str = s.slice(i, j);
+      if (wordDict.includes(str) && ary[i] === 1) {
+        ary[j] = 1;
+      }
+    }
+  }
+
+  return ary[s.length] === 1;
+};
+
 /**
  * @param {string} s
  * @param {string[]} wordDict
@@ -5,6 +30,7 @@
  */
 // O(nlogn+n*w)
 // S(n*w)
+// Sort first
 const wordBreak = (s, wordDict) => {
   wordDict.sort((a,b) => { return b.length-a.length });
 

@@ -2,6 +2,7 @@
  * @param {number[][]} intervals
  * @return {number}
  */
+// O(nlogn + n^2)
 const minMeetingRooms = (interval) => {
   if (interval.length <= 1) return interval.length;
   interval.sort((a,b) => {

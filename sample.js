@@ -1,3 +1,43 @@
+
+var findKthLargest = function(nums, k) {
+    return quickSelect(nums)
+    
+    function quickSelect(nums, lo = 0, hi = nums.length - 1) {
+      if (lo >= hi) return nums[hi];
+      // We arbitrarily pick the last num
+      let pivot = nums[hi]
+
+      // i is the position that that the pivot should be in
+      // j is the current num
+      let i = lo, 
+          j = lo
+      // for every num between lo and hi
+      for (; j < hi; j++) {
+            // if the current num is less than or equal to the pivot, swap
+            if (nums[j] <= pivot) {
+                swap(nums, i, j);
+                i++
+            }
+      }
+      swap(nums, i, j);
+      if (i === nums.length - k) {
+          return nums[i]
+      } else if (i < nums.length - k) {
+          return quickSelect(nums, i + 1, hi);
+      } else {
+          return quickSelect(nums, lo, i - 1);
+      }
+    };
+
+};
+
+function swap(nums, i, j) {
+    [nums[i], nums[j]] = [nums[j], nums[i]]
+}
+
+findKthLargest([3,2,1,5,6,4], 2)
+
+
 // Backtrack
 // var subsets = function(nums) {
 //     let result = [[]];

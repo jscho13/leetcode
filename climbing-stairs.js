@@ -2,6 +2,7 @@
  * @param {number} n
  * @return {number}
  */
+// Tabulation
 // O(n*k)
 // S(n)
 const climbStairs = (n) => {
