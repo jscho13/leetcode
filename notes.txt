@@ -1,44 +1,183 @@
-INTERVIEWCAKE
+
+
+LEETCODE
 ------------------------------------------------------------------------
-DONE: highest-product-of-3
-DONE: merging-ranges
-DONE: balanced-binary-tree
-DONE: bst-checker -> can be refactored even a bit more... but good enough
-DONE: largest-stack
-DONE: queue-two-stacks
-DONE: matching-parens
-DONE: bracket-validator
-DONE: nth-fib
-DONE: cake-thief
-DONE: delete-node
-DONE: second-largest-item-in-bst
-DONE: linked-list-cycles
-DONE: rectangular love
+longest-mountain-in-array - solved in a more complicated way than it needed
+permutations-ii - what is the big o and space of your solution?
+two-sum-ii-input-array-is-sorted.js - needs to think different
+meeting-rooms - solved by very messy. can be cleaner
+product-of-array-except-self - the constant space solution is really S(1n). you're allowed to partition one array only (not S(2n))
+word-break.js - could make this cleaner. you did some weird bfs variation
+construct-binary-tree-from-preorder-and-inorder-traversal.js - could be cleaner
+climbing-stairs - do it without DP
+jump-game - there's several approaches to this... you got to level 2, there's level 4
+lowest-common-ancestor-of-a-binary-search-tree - optional but could be much cleaner
+find-minimum-in-rotated-sorted-array - there's a simpler way of reasoning about this
+validate-binary-search-tree.js -> try the other solutions
+counting-bits.js
+shortest-palindrome - how are you supposed to get the key idea here?
+lru-cache
+word-search-ii.js
+add-and-search-word-data-structure-design.js
+delete-nodes-and-return-forest.js
+image-overlap.js
+interviewcake/simulate-7-sided-die.js
+maximum-number-of-events-that-can-be-attended.js
+non-overlapping-intervals.js
+number-of-connected-components-in-an-undirected-graph.js
+pacific-atlantic-water-flow.js
+remove-nth-node-from-end-of-list.js
+reverse-bits.js
+longest-univalue-path
+majority-element - try to solve w/out brute force, sorting, and hashmap
+find-k-pairs-with-smallest-sums
+shortest-unsorted-continuous-array
+capacity-to-ship-packages-within-d-days
+minimum-domino-rotations-for-equal-row
+insertion-sort-list.js
+house-robber-iii - solved it very inefficiently
+longest-substring-with-at-least-k-repeating-characters - try a non-sliding windows approach
+https://leetcode.com/problems/numbers-at-most-n-given-digit-set/
+https://leetcode.com/problems/smallest-subtree-with-all-the-deepest-nodes/
+https://leetcode.com/problems/increasing-triplet-subsequence/ - didn't get followup
+https://leetcode.com/problems/check-array-formation-through-concatenation/
 
 
 
-FAILED
-12. simulate-7-sided-die
-4. find-duplicate-optimize-for-space
-5. graph-coloring - current solution is O(N*D), find O(N+M)
-5. mesh-message - bad approach
-6. recursive-string-permutations
-5. find-duplicate-optimize-for-space-beast-mode
-6. coin
-11. find-unique-among-duplicates -> needed all the hints but got it
-12. shuffle.js
+
+OPTIONAL
+----------------
+https://leetcode.com/problems/validate-binary-tree-nodes/ - ended up getting this but it took like an hour. was rusty. it's a fun problem though
 
 
 
 
 
+Interviewing soft skills
+------------------
+They want to test:
+1) how you deal with pressure
+2) ability to express clearly (write code like you are trying to explain to someone)
+3) people who write sudo code and then translate to real code tend to do better
+
+
+
+Don't rush into detail. Take your time, really system design is about going through the flow naturally,
+and finding the first point that needs extra detail. It will come up naturally, let the interviewer give you feedback and direct you to where they want to go
+Don't say "I don't know" or be super blunt. It's okay to take your time to compose your thoughts. Say "give me a moment to think", or "I need a second"
+Your design WON'T be perfect. The interviewer will find a way to break it. The goal is to test your flexibility.
+Form your thoughts - don't toss in technologies without rationale (e.g. we're gonna use a nosql cassandra db... like why?)
+"in my ideal world, I wanna be surrounded by people who are smarter than me" - its great to learn from others and share cool tid bits as well
+
+
+pillars of system design:
+1 - clarity of thought
+2 - flexibility. roll with the punches
+3 - knowledgeable. stay aware of what else is out there in the world
+
+
+some key phrases...
+it's okay to say "am I missing something?"
+"you know"? (the rhetorical one)
+that was the thing I was thinking about but couldn't put my finger on it
+"health check" - check if all the statuses are good
 
 
 
 
 
 NOTES
+------------------------------------------------------------------------
+Be super careful for checking `if (obj[n])`. Sometimes obj[n] === 0 and this has caused HUGE headaches!!!
+In general, once you do too many of these you get too narrow. You can add arguments if you want, do new datastructures, add extra space.
+Just get a solution doesn't have to be optimal the first try.
+
+quickselect/quicksort - try and get this down
+binary-search - IF ITS SORTED, always consider this
+two-pointers - this is actually really easy once you have sliding window, which is the hardest version of this
+when to use DP - bottom up strategy. generally reduces to a single value
+when to use backtracking - find all combinations of something
+when to use sliding window - min or max of some string
+greedy algorithims - basically calculate things as you go
+stack with a queue - pop vs push... there's ways to bend this property
+graphs - generally edge cases are no edges, cycles, and loops
+hashing algorithims - for the find anagrams problem... you can convert strings into a number which gives it a unique id. like a = 1 point, b = 2 point, etc... abc = 6 points. similar concept, except the points are primes to be unique
+double-linked-lists - much easier to work with iteratively since it can go both ways
+
+
+Arrays:
+lots of techniques here.
+find sum
+reverse
+two pointer
+dp
+backtracking
+
+
+
+Test is a bit faster... it's a boolean and takes a regexp e.g. string.test(^[0-9]+$) => true
+Match is slower but returns results e.g. /^[A-Z]+$/.match(string) => ['A', 'B', 'C']
+shift [1,2,3] => [2,3] and returns 1
+unshift [2,3] => [4,2,3] and returns 4
+
+
+
+Linked Lists:
+limited techniques. slow and fast pointers get you to halfway point
+you can also reverse
+there's also recursion
+usually a combination of those should get what you want
+
+
+
+Graph theory:
+valid trees have n-1 edges... think about it. N - N - N always has 3 nodes and 2 edges. Any less they're not all connected, anymore and there's cycles in there
+actually a lot of problems that involve N-branches, can be considered graph problems
+
+
+DFS:
+Space-complexity of DFS is height of the tree...
+while the space-complexity of BFS is the depth of the tree... makes sense yeah?
+Height of tree can be calculated via S(log n) didn't know that!
+
+BST:
+topological sort is an extension of BST. it's the same idea except you have an indegree -> levels that need to be done before reaching current depth
+
+
+
+
+
+Backtracking:
+
+It's usually like...
+// do some option
+search(idx, ans, tracker);
+// pop the last option
+ans.pop();
+// do the option+1
+search(idx+1, ans, tracker);
+
+
+
+DP:
+Have a hard time determining the difference between using DP bottom up,
+or backtracking to find all combinations.
+
+The intuition for DP is if you want to build a list of options, and keep
+track of variations as you go up. I guess the two can be interchangeable,
+just sometimes one is easier to user than the other?
+
+In GENERAL dp reduces to a single value. backtracking is a bruteforce way of getting all combinations
+
+
+
+
 Binary search:
+
+Runtime of `O(log n)`
+Basically a binary search lets you go through a sorted list faster. It only works on sorted lists.
+Going through left -> right is called a linear search
+You take the two ends and move left/right index to get closer. The sides go to the midpoint of the two. It's far faster since it's halving the distance instead of one at a time.
 
 When going through the list there's extra if/else logic for the first and last element
 It's way cleaner to do a while loop.
@@ -46,17 +185,21 @@ It's way cleaner to do a while loop.
 function binarySearch() {
   // set stuff here
 
-  while (leftIndex < rightIndex) {
+  while (leftIndex <= rightIndex) {
     // move the leftIndex up or rightIndex down accordingly
-
-    if (leftIndex+1 === rightIndex) {
-      // you know you're at the end of the list so get out of the loop
-      break;
-    }
+    if (overshoot)
+      rightIndex = mid-1;
+    else if (undershoot)
+      leftIndex = mid+1;
+    else
+      return mid;
+    end
   }
 
   return rightIndex;
 }
+
+
 
 
 BST:
@@ -92,11 +235,6 @@ function bfs(graph, startNode, endNode) {
 }
 
 
-DFS:
-Space-complexity of DFS is height of the tree...
-while the space-complexity of BFS is the depth of the tree... makes sense yeah?
-Height of tree can be calculated via S(log n) didn't know that!
-
 
 Binary:
 Use right shift >>> for divide by 2 (>> appends a 1. it's good for 2's complement)
@@ -104,42 +242,28 @@ And left shift << for multiply by 2
 XOR (^) is good for canceling things out
 
 
+Priority Queue:
+It's like a tree that automatically sorts for you. A max heap will always keep the highest element at the root, a min heap will always keep the lowest number
+It's good for organizing items that have different levels, like you want to always see the most frequent characters in a string
+very similar to a min-max heap. the usual methods are push, peek, pop. these methods call an inner bubble up/bubble down
 
-LEETCODE
-------------------------------------------------------------------------
-# do this in javascript
-longest-univalue-path
 
-# how are you supposed to get the key idea here?
-shortest-palindrome
 
-# solved but very slow
-first-unique-character-in-a-string
 
-# solve this manually without sort
-merge-k-sorted-lists
 
-# excellent tree practice
-validate-binary-search-tree
+Google values the fundamentals.
+arrays, recurision, strings, and trees
+was the array question dp or backtracking? get number of words from dictionary. twist (what if theres no matching words?)
+it's okay to drop a placeholder function and dive deeper into it later on, it's more important to have a solid working algorithim
 
-# try and do it with DLL
-lru-cache
+interview questions:
+first try:
+array manipulation question
+trie question
+design question
 
-# try without sorting
-merge-intervals
-
-# try iterative version
-binary-tree-inorder-traversal
-
-# can you solve this in one line?
-maximum-depth-of-binary-tree
-
-# do this faster
-find-k-pairs-with-smallest-sums
-
-# aim for 50%
-minimum-window-substring
-
-# solve it with a stack
-shortest-unsorted-continuous-array
+second try:
+the dictionary one. given a string count number of words in that string given a dictionary. bonus question what if there are words not in there that you want to count? (e.g. proper nouns)
+binary tree traversal via DFS
+create document.querySelector by classname, id, etc
 
