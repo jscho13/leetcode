@@ -105,8 +105,7 @@ hashing algorithims - for the find anagrams problem... you can convert strings i
 double-linked-lists - much easier to work with iteratively since it can go both ways
 
 
-Arrays:
-lots of techniques here.
+Different ways of with arrays:
 find sum
 reverse
 two pointer
